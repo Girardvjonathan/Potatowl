@@ -1,0 +1,34 @@
+{
+  "name": "potatowl",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./server.js --exec babel-node",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "latest",
+    "angular-route": "latest",
+    "animate.css": "latest",
+    "body-parser": "^1.15.2",
+    "bootstrap": "latest",
+    "cors": "^2.8.1",
+    "express": "^4.14.0",
+    "font-awesome": "latest",
+    "method-override": "^2.3.7",
+    "mongodb": "^2.2.21",
+    "mongoose": "^4.7.7"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.14.0",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-stage-2": "^6.13.0",
+    "babel-register": "^6.14.0",
+    "jsonfile": "^2.4.0",
+    "mocha": "^3.0.2",
+    "nodemon": "latest"
+  }
+}
