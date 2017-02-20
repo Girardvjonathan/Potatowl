@@ -4,6 +4,11 @@ Potatowl is [will be] a serie tracker
 'npm i'
 'bower i'
 
+# Pour lancer
+'npm start'
+http://localhost:3000/
+
+
 #TODO
 async-promise for tv loading
 
