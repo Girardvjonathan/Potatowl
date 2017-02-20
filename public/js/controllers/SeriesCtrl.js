@@ -1,98 +1,99 @@
 (function () {
     'use strict';
-angular.module('SeriesCtrl', []).controller('SeriesController',['$http', TV]);
-function TV($http) {
-      var vm = this;
-      vm.title = "My title";
+angular.module('SeriesCtrl', []).controller('SeriesController',['$http','$q','$scope', TV]);
+function TV($http, $q,$scope) {
+      $scope.title = "My title";
       const KEY = '?api_key=1b1497adc03fb28cf8df7fa0cdaed980';
       const CONFIG_URL = 'https://api.themoviedb.org/3/discover/tv'+KEY+'&page=';
       const CONFIG_DESC = 'https://api.themoviedb.org/3/tv/';
       const CONFIG_SEARCH = 'http://api.themoviedb.org/3/search/tv'  + KEY +  '&page=';
 
-     var $search = $('#search');
-      $search.keypress(function (e) {
-          console.log('ok');
-          if (e.keyCode == 13) {
-              loadData();
-              vm.page = 1;
-          }
-      });
+    //  var $search = $('#search');
+    //   $search.keypress(function (e) {
+    //       console.log('ok');
+    //       if (e.keyCode == 13) {
+    //           loadData();
+    //           $scope.page = 1;
+    //       }
+    //   });
 
-      vm.init = function () {
-          vm.page = 1;
-          vm.maxPage = 1;
-          vm.tv = [];
-          loadData();
+      var init = function () {
+          $scope.page = 1;
+          $scope.maxPage = 1;
+          $scope.tv = [];
+          var promise = loadData();
+          promise.then(function(data) {
+            data = data.data;
+              $scope.media = data;
+              $scope.maxPage = data.total_pages;
+              $scope.page = data.page;
+              $scope.totalResults = data.total_results;
+          }, function(reason) {
+                 alert('Failed: ' + reason);
+                  $("#spinner").hide();
+                });
       };
 
-      vm.searchFilter = function (input) {
-          if (input) {
-              return input.name.indexOf(vm.search) >= 0;
-          }
-          return true;
-
-      };
+      // $scope.searchFilter = function (input) {
+      //     if (input) {
+      //         return input.name.indexOf($scope.search) >= 0;
+      //     }
+      //     return true;
+      //
+      // };
 
       function loadData() {
-          var search = $search.val();
-          if (search != '' && typeof search === 'string' && search.length < 64 ) {
-              $http.get(CONFIG_SEARCH + vm.page + '&query='+search).then(function (data) {
-                  vm.tv = data.results;
-                  vm.maxPage = data.total_pages;
-                  vm.page = data.page;
-                  vm.totalResults = data.total_results;
+          var deferred = $q.defer();
+          deferred.notify('Chargement de l\'information ');
+          $http.get(CONFIG_URL + $scope.page).then(function (data) {
+                  deferred.resolve(data);
+              },function(data, status, headers, config) {
+                  deferred.reject(status);
               });
-               return;
-          }
-          $http.get(CONFIG_URL + vm.page).then(function (data) {
-                  vm.tv = data.results;
-                  vm.maxPage = data.total_pages;
-                  vm.page = data.page;
-                  vm.totalResults = data.total_results;
-              });
+          return deferred.promise;
       }
 
-      vm.getPosterMedium = function (url) {
+      $scope.getPosterMedium = function (url) {
           if (url === null) {
               return 'assets/img/cover-placeholder.jpg';
           }
           return 'http://image.tmdb.org/t/p/w300' + url;
       };
 
-      vm.getPosterBig = function (url) {
+      $scope.getPosterBig = function (url) {
           if (url === null) {
               return '';
           }
           return 'http://image.tmdb.org/t/p/w500/' + url;
       };
 
-      vm.onChange = function (number) {
-          //switch case
-          switch (number) {
-              case 0:
-                  if (vm.page > 1) vm.page--;
-                  loadData();
-                  break;
-              case 6:
-                  if (vm.page < vm.maxPage) vm.page++;
-                  loadData();
-                  break;
-              default:
-                  if (number > 0 && number < vm.maxPage) {
-                      vm.page = number;
-                      loadData();
-                  }
-          }
-      };
+      // $scope.onChange = function (number) {
+      //     //switch case
+      //     switch (number) {
+      //         case 0:
+      //             if ($scope.page > 1) $scope.page--;
+      //             loadData();
+      //             break;
+      //         case 6:
+      //             if ($scope.page < $scope.maxPage) $scope.page++;
+      //             loadData();
+      //             break;
+      //         default:
+      //             if (number > 0 && number < $scope.maxPage) {
+      //                 $scope.page = number;
+      //                 loadData();
+      //             }
+      //     }
+      // };
 
       // https://api.themoviedb.org/3/tv/12?api_key=1b1497adc03fb28cf8df7fa0cdaed980
-      vm.getMoreInfo = function getMoreInfo(id) {
+      $scope.getMoreInfo = function getMoreInfo(id) {
           $http.get(CONFIG_DESC + id + KEY).then(function (data) {
-              vm.overview = data.overview;
-              vm.tagline = data.tagline;
+              $scope.overview = data.overview;
+              $scope.tagline = data.tagline;
           });
       };
 
-      vm.init();
+    init();
   }
 })();

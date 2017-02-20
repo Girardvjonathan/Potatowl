@@ -1,14 +1,13 @@
 <div class="jumbotron text-center">
-    <h1>{{media.title}}</h1>
-    {{media}}
-</div>
-
-<div class="row" ng-repeat="(rowIndex,tv) in media.media  as elem"
-     ng-if="rowIndex % 4 == 0">
-    <div class="col-md-3 " ng-repeat="elIdx in [0,1,2,3]" ng-if="elem[rowIndex+elIdx]">
-        <h3 class="title">{{elem[rowIndex+elIdx].name}}</h3>
-        <img class="img-responsive portfolio-item resultImage"
-             ng-src="{{media.getPosterMedium(elem[rowIndex+elIdx].poster_path)}}" alt="">
+    <h1>{{title}}</h1>
+    <div class="row" ng-repeat="(rowIndex, value) in media.results  as elem"
+         ng-if="rowIndex % 4 == 0">
+        <div class="col-md-3 " ng-repeat="elIdx in [0,1,2,3]" ng-if="elem[rowIndex+elIdx]">
+            <h3 class="title">{{elem[rowIndex+elIdx].name}}</h3>
+            <img class="img-responsive portfolio-item resultImage"
+                 ng-src="{{getPosterMedium(elem[rowIndex+elIdx].poster_path)}}" alt="">
+        </div>
     </div>
 </div>
+
 <!-- <my-pagination class="pager" on-change="media.onChange(number)" max-page="media.maxPage" page="media.page"></my-pagination> -->
