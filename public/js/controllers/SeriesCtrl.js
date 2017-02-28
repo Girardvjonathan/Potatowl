@@ -1,7 +1,7 @@
 (function () {
     'use strict';
-angular.module('SeriesCtrl', []).controller('SeriesController',['$http','$q','$scope', TV]);
-function TV($http, $q,$scope) {
+angular.module('SeriesCtrl', []).controller('SeriesController',['$http','$q','$scope', '$location', '$httpParamSerializer', TV]);
+function TV($http, $q,$scope, $location, $httpParamSerializer) {
       $scope.title = "My title";
       const KEY = '?api_key=1b1497adc03fb28cf8df7fa0cdaed980';
       const CONFIG_URL = 'https://api.themoviedb.org/3/discover/tv'+KEY+'&page=';
@@ -45,7 +45,8 @@ function TV($http, $q,$scope) {
       function loadData() {
           var deferred = $q.defer();
           deferred.notify('Chargement de l\'information ');
-          $http.get(CONFIG_URL + $scope.page).then(function (data) {
+
+          $http.get(CONFIG_URL + $scope.page + "&" + $httpParamSerializer($location.search())).then(function (data) {
                   deferred.resolve(data);
               },function(data, status, headers, config) {
                   deferred.reject(status);
