@@ -11,7 +11,12 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 		.when('/series', {
 			templateUrl: 'views/series.html',
 			controller: 'SeriesController as media'
-		});
+		})
+
+    .when('/search', {
+        templateUrl: 'views/search.html',
+        controller: 'SearchController as searchCtrl'
+    });
 
 		// .when('/geeks', {
 		// 	templateUrl: 'views/geek.html',
