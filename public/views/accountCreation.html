@@ -1,0 +1,28 @@
+<form>
+    <fieldset class="form-group">
+        <legend>Create an account</legend>
+
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input  class="form-control" ng-model="accountCreationCtrl.name" type="text"  id="name" placeholder="Enter user name">
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input class="form-control" ng-model="accountCreationCtrl.email" type="text" id="email"  placeholder="Enter user email">
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input class="form-control" ng-model="accountCreationCtrl.password" type="password" id="password">
+        </div>
+
+      <div class="form-group">
+            <label for="passwordValidation">Password Validation</label>
+            <input class="form-control" type="password" id="password">
+        </div>
+
+    </fieldset>
+
+    <button type="submit" class="btn btn-primary" ng-click="createUser()">Submit</button>
+</form>
