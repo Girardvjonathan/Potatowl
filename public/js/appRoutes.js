@@ -16,6 +16,11 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
     .when('/search', {
         templateUrl: 'views/search.html',
         controller: 'SearchController as searchCtrl'
+    })
+
+    .when('/likes', {
+        templateUrl: 'views/seriesLiked.html',
+        controller: 'SeriesLikedCtrl as likedCtrl'
     });
 
 		// .when('/geeks', {

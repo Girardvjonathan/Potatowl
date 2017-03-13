@@ -2,7 +2,7 @@
     'use strict';
 angular.module('SeriesCtrl', []).controller('SeriesController',['$http','$q','$scope', '$location', '$httpParamSerializer', TV]);
 function TV($http, $q,$scope, $location, $httpParamSerializer) {
-      $scope.title = "My title";
+      $scope.title = "TV Shows";
       const KEY = '?api_key=1b1497adc03fb28cf8df7fa0cdaed980';
       const CONFIG_URL = 'https://api.themoviedb.org/3/discover/tv'+KEY+'&page=';
       const CONFIG_DESC = 'https://api.themoviedb.org/3/tv/';
