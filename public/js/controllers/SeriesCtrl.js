@@ -6,7 +6,7 @@ function TV($http, $q,$scope, $location, $httpParamSerializer) {
       const KEY = '?api_key=1b1497adc03fb28cf8df7fa0cdaed980';
       const CONFIG_URL = 'https://api.themoviedb.org/3/discover/tv'+KEY+'&page=';
       const CONFIG_DESC = 'https://api.themoviedb.org/3/tv/';
-      const CONFIG_SEARCH = 'http://api.themoviedb.org/3/search/tv'  + KEY +  '&page=';
+      const CONFIG_SEARCH = 'https://api.themoviedb.org/3/search/tv'  + KEY +  '&page=';
 
     //  var $search = $('#search');
     //   $search.keypress(function (e) {
@@ -58,14 +58,14 @@ function TV($http, $q,$scope, $location, $httpParamSerializer) {
           if (url === null) {
               return 'assets/img/cover-placeholder.jpg';
           }
-          return 'http://image.tmdb.org/t/p/w300' + url;
+          return 'https://image.tmdb.org/t/p/w300' + url;
       };
 
       $scope.getPosterBig = function (url) {
           if (url === null) {
               return '';
           }
-          return 'http://image.tmdb.org/t/p/w500/' + url;
+          return 'https://image.tmdb.org/t/p/w500/' + url;
       };
 
       // $scope.onChange = function (number) {
