@@ -46,7 +46,7 @@ function TV($http, $q,$scope, $location, $httpParamSerializer) {
           var deferred = $q.defer();
           deferred.notify('Chargement de l\'information ');
 
-          $http.get(CONFIG_URL + $scope.page + "&" + $httpParamSerializer($location.search())).then(function (data) {
+          $http.get((!!$location.search().query ? CONFIG_SEARCH : CONFIG_URL )+ $scope.page + "&" + $httpParamSerializer($location.search())).then(function (data) {
                   deferred.resolve(data);
               },function(data, status, headers, config) {
                   deferred.reject(status);
@@ -56,7 +56,7 @@ function TV($http, $q,$scope, $location, $httpParamSerializer) {
 
       $scope.getPosterMedium = function (url) {
           if (url === null) {
-              return 'assets/img/cover-placeholder.jpg';
+              return 'images/cover-placeholder.jpg';
           }
           return 'https://image.tmdb.org/t/p/w300' + url;
       };
