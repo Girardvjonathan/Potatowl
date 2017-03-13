@@ -56,7 +56,7 @@ function TV($http, $q,$scope, $location, $httpParamSerializer) {
 
       $scope.getPosterMedium = function (url) {
           if (url === null) {
-              return 'assets/img/cover-placeholder.jpg';
+              return 'images/cover-placeholder.jpg';
           }
           return 'https://image.tmdb.org/t/p/w300' + url;
       };
