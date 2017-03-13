@@ -1,5 +1,3 @@
-
-
 angular.module('app', ['ngRoute', 'appRoutes', 'MainCtrl', 'SeriesCtrl','SeriesService', 'SearchCtrl','stormpath', 'stormpath.templates'])
 .config(function (STORMPATH_CONFIG) {
 
@@ -7,4 +5,3 @@ angular.module('app', ['ngRoute', 'appRoutes', 'MainCtrl', 'SeriesCtrl','SeriesS
 
     STORMPATH_CONFIG.ENDPOINT_PREFIX = 'https://husky-spear.id.stormpath.io';
   });
-
