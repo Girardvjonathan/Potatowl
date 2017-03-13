@@ -3,16 +3,19 @@ angular.module('SearchCtrl', []).controller('SearchController', function ($scope
     var vm = this;
 
     vm.search = function () {
-        if (!!vm.searchParams.primary_release_date && !!!!vm.searchParams.primary_release_date.gte) {
-            vm.searchParams['primary_release_date.gte'] = $filter('date')(vm.searchParams.primary_release_date.gte, 'yyyy-mm-dd');
-        }
-        if (!!vm.searchParams.primary_release_date && !!!!vm.searchParams.primary_release_date.lte) {
-            vm.searchParams['primary_release_date.lte'] = $filter('date')(vm.searchParams.primary_release_date.gte, 'yyyy-mm-dd');
+        if(!!vm.searchParams){
+            if (!!vm.searchParams.air_date && !!vm.searchParams.air_date.gte) {
+                vm.searchParams['air_date.gte'] = vm.searchParams.air_date.gte;
+            }
+            if (!!vm.searchParams.air_date && !!vm.searchParams.air_date.lte) {
+                vm.searchParams['air_date.lte'] = vm.searchParams.air_date.lte;
+            }
+
+            delete vm.searchParams.air_date;
+
+            $location.path('/series').search(vm.searchParams);
         }
 
-        delete vm.searchParams.primary_release_date;
-
-        $location.path('/series').search(vm.searchParams);
     }
 
 
