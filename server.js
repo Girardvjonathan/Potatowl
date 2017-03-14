@@ -32,10 +32,7 @@ app.use(express.static(__dirname + '/public'));
 require('./app/routes')(app); // configure our routes
 
 // connect to our mongoDB database
-// (uncomment after you enter in your own credentials in config/db.js)
-db.connectDB(function() {
-    db.migrateDB();
-
+db.connect(function() {
     // startup our app at http://localhost:8080
     app.listen(port);
 
