@@ -1,5 +1,6 @@
 module.exports = {
     connectDB: function(callback) {
+    "use strict";
         let username = 'stapp-admin';
         let password = 'youareapirate';
         let mongodbUri = 'mongodb://' + username + ':' + password + '@ds123050.mlab.com:23050/potatowl-db';
@@ -16,6 +17,7 @@ module.exports = {
     },
 
     migrateDB: function() {
+        "use strict";
         let mongoose = require('mongoose');
         let Schema = mongoose.Schema;
 

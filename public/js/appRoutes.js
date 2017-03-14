@@ -21,7 +21,11 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
     .when('/likes', {
         templateUrl: 'views/seriesLiked.html',
         controller: 'SeriesLikedCtrl as likedCtrl'
-    });
+    })
+        .when('/seriesDetails', {
+            templateUrl: 'views/seriesDetails.html',
+            controller: 'SeriesLikedCtrl as likedCtrl'
+        });
 
 		// .when('/geeks', {
 		// 	templateUrl: 'views/geek.html',
