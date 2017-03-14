@@ -29,6 +29,9 @@ module.exports = function(app) {
     var users = require('./users');
     app.use('/users', users);
 
+    var likes = require('./likes');
+    app.use('/likes', likes);
+
     app.get('*', function(req, res) {
         res.sendfile('./public/index.html');
     });
