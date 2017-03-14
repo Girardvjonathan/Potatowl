@@ -16,9 +16,11 @@ const mongoose = require('mongoose');
 
 
 // config files
-// var db = require('./config/db');
-mongoose.connect('mongodb://localhost/potatowl');
-var db = mongoose.connection;
+//online
+var db = require('./config/db');
+//local
+// mongoose.connect('mongodb://localhost/potatowl');
+// var db = mongoose.connection;
 
 // set our port
 app.set('port', (process.env.PORT || 3000));
@@ -86,10 +88,13 @@ app.use(function (req, res, next) {
 // routes ==================================================
 require('./app/routes/routes')(app); // configure our routes
 
-
-app.listen(app.get('port'), function(){
-    console.log('Server started on port '+app.get('port'));
+db.connectDB(function() {
+    // startup our app at http://localhost:8080
+    app.listen(app.get('port'), function(){
+        console.log('Server started on port '+app.get('port'));
+    });
 });
+
 
 // expose app
 exports = module.exports = app;
