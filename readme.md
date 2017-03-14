@@ -16,3 +16,6 @@ DB hosting: https://mlab.com/
 
 Following
 https://scotch.io/tutorials/setting-up-a-mean-stack-single-page-application#updated-view-files
+
+Some code is from :
+https://github.com/bradtraversy/loginapp
