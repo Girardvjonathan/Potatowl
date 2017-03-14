@@ -8,6 +8,11 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 			controller: 'MainController'
 		})
 
+        .when('/login', {
+            templateUrl: 'views/login.html',
+            controller: 'LoginController'
+        })
+
 		.when('/series', {
 			templateUrl: 'views/series.html',
 			controller: 'SeriesController as media'

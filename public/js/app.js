@@ -1,7 +1,24 @@
-angular.module('app', ['ngRoute', 'appRoutes', 'MainCtrl', 'SeriesCtrl','SeriesService','stormpath', 'stormpath.templates'])
-.config(function (STORMPATH_CONFIG) {
+angular.module('app', ['ngRoute', 'appRoutes', 'MainCtrl', 'SeriesCtrl','SeriesService','satellizer'])
+    .config(function($authProvider) {
 
-    // Specify your Client API domain here:
+        // $authProvider.facebook({
+        //     clientId: 'Facebook App ID'
+        // });
+        //
+        // // Optional: For client-side use (Implicit Grant), set responseType to 'token' (default: 'code')
+        // $authProvider.facebook({
+        //     clientId: 'Facebook App ID',
+        //     responseType: 'token'
+        // });
 
-    STORMPATH_CONFIG.ENDPOINT_PREFIX = 'https://husky-spear.id.stormpath.io';
-  });
+        $authProvider.google({
+            clientId: '239913616155-tieqt533csgmens2kfr45ckaab3e6qo4.apps.googleusercontent.com'
+        });
+
+        // $authProvider.github({
+        //     clientId: 'GitHub Client ID'
+        // });
+        //
+
+
+    });
