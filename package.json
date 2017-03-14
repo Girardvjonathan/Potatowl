@@ -19,8 +19,18 @@
     "express": "^4.14.0",
     "font-awesome": "latest",
     "method-override": "^2.3.7",
+    "express-messages": "*",
+    "express-session": "*",
+    "express-validator": "*",
     "mongodb": "^2.2.21",
-    "mongoose": "^4.7.7"
+    "mongoose": "^4.7.7",
+    "bcryptjs": "*",
+    "express-handlebars": "*",
+    "connect-flash": "*",
+    "cookie-parser": "^1.4.1",
+    "passport": "*",
+    "passport-http": "*",
+    "passport-local": "*"
   },
   "devDependencies": {
     "babel-cli": "^6.14.0",

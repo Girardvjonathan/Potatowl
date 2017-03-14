@@ -1,12 +1,46 @@
 var mongoose = require('mongoose');
+var bcrypt = require('bcryptjs');
 
-module.exports = mongoose.model('user', {
-    id:                     {type: Number, default: Math.random()},
-    name:                   {type: String, default: ''},
-    password:               {type: String, default: ''},
-    email:                  {type: String, default: ''},
-    id_series:              {type: [Number], default: []},
-    id_watched_episodes:    {type: [Number], default: []},
-    created_at:             {type: Date, default: Date.now()},
-    updated_at:             {type: Date, default: Date.now()}
+// User Schema
+var UserSchema = mongoose.Schema({
+    username: {
+        type: String,
+        index:true
+    },
+    password: {
+        type: String
+    },
+    email: {
+        type: String
+    },
+    name: {
+        type: String
+    }
 });
+
+var User = module.exports = mongoose.model('User', UserSchema);
+
+module.exports.createUser = function(newUser, callback){
+    bcrypt.genSalt(10, function(err, salt) {
+        bcrypt.hash(newUser.password, salt, function(err, hash) {
+            newUser.password = hash;
+            newUser.save(callback);
+        });
+    });
+}
+
+module.exports.getUserByUsername = function(username, callback){
+    var query = {username: username};
+    User.findOne(query, callback);
+}
+
+module.exports.getUserById = function(id, callback){
+    User.findById(id, callback);
+}
+
+module.exports.comparePassword = function(candidatePassword, hash, callback){
+    bcrypt.compare(candidatePassword, hash, function(err, isMatch) {
+        if(err) throw err;
+        callback(null, isMatch);
+    });
+}
