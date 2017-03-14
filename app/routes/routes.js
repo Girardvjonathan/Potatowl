@@ -10,8 +10,8 @@ module.exports = function(app) {
 	});
 
     // Init db with user
-    app.get('/initdb', function(req, res) {
-        require('/app/models/migration')();
+    app.get('/migration', function(req, res) {
+        require('./../models/migration')();
         res.sendfile('./public/index.html');
     });
 
