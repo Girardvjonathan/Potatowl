@@ -19,3 +19,10 @@ https://scotch.io/tutorials/setting-up-a-mean-stack-single-page-application#upda
 
 Some code is from :
 https://github.com/bradtraversy/loginapp
+
+
+
+// API route
+/users/login
+/users/register
+/likes/add
