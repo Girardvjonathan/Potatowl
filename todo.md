@@ -1,6 +1,14 @@
-* Remove like
-* view for like per user
-* access to page unlogged
-* retro-action quand une tv serie est deja like ou quon vient de la like dans la vue de base
-* identication of being logged
+# TODO
+* Remove liked series
+* view details of a series
+* Notification ?!
+* offuscation du mdp de la bd
+* Service d'admin
+
+
+
+# optimization
+* access to page unlogged blocked
+* retro-action quand une tv serie vient detre ajouter c-a-d enlever le bouton ajouter
+* html css
 * etc.
