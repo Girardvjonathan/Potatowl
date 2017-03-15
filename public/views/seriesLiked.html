@@ -1,6 +1,6 @@
 <div class="jumbotron text-center">
     <h1>{{title}}</h1>
-    <div class="row" ng-repeat="(rowIndex, value) in likedSeries.results  as elem"
+    <div class="row" ng-repeat="(rowIndex, value) in series  as elem"
          ng-if="rowIndex % 4 == 0">
         <div class="col-md-3 " ng-repeat="elIdx in [0,1,2,3]" ng-if="elem[rowIndex+elIdx]">
             <h3 class="title">{{elem[rowIndex+elIdx].name}}</h3>
@@ -8,7 +8,7 @@
                  ng-src="{{getPosterMedium(elem[rowIndex+elIdx].poster_path)}}" alt="">
         </div>
     </div>
-    <div ng-show="!likedSeries.results||likedSeries.results.length==0">
+    <div ng-show="!series">
         <h3>You don't like any TV Shows</h3>
     </div>
 </div>

@@ -87,7 +87,7 @@ router.post('/login', function(req, res, next) {
             if (err) {
                 return next(err);
             }
-
+            user['password'] = undefined;
             return res.send(JSON.stringify(user));
         });
     })(req, res, next);

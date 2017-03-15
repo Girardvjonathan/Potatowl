@@ -6,6 +6,11 @@ angular.module('MainCtrl', []).controller('MainController', function($http, $sco
 	// if(error) {
 	// 	$scope.errorMessage = "Username/password doesnt match anything in our system"
 	// }
+    if($rootScope.likes) {
+        $scope.numberSeries = $rootScope.likes.length;
+        $scope.name = $rootScope.user.name;
+    }
+
     $scope.login = function (user) {
         $http({
             method: 'POST',
@@ -19,11 +24,33 @@ angular.module('MainCtrl', []).controller('MainController', function($http, $sco
             // $http.defaults.headers.common.Authorization = auth;
 			console.log("ho hi",response.data);
             $rootScope.user = response.data;
-            $location.path('/likes');
+            // Get all liked series
+            $http({
+                method: 'GET',
+                url: '/likes/getAll',
+                headers: {'user_id': $rootScope.user._id}
+            }).then(function successCallback(response) {
+                // User.setUser(response.data);
+                // var auth = "Basic " + btoa(user.username + ':' + user.password);
+                // $cookies.put('session', auth);
+                // $http.defaults.headers.common.Authorization = auth;
+                $rootScope.likes = valuesToArray(response.data);
+                $rootScope.numberSeries = $rootScope.likes.length;
+
+                console.log("My likes are",$rootScope.likes);
+                $location.path('/likes');
+
+            }, function errorCallback() {
+                $scope.errorMessage = "Oops ?";
+            });
+
 
         }, function errorCallback() {
             $scope.errorMessage = "Username/password doesnt match anything in our system";
         });
-
     };
+
+    function valuesToArray(obj) {
+        return Object.keys(obj).map(function (key) { return obj[key]['serie_id']; });
+    }
 });

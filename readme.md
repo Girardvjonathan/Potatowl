@@ -26,3 +26,4 @@ https://github.com/bradtraversy/loginapp
 /users/login
 /users/register
 /likes/add
+/likes/getAll

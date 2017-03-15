@@ -1,13 +1,19 @@
 (function () {
     'use strict';
-    angular.module('SeriesCtrl', []).controller('SeriesController', ['$http', '$q', '$scope', '$location', '$httpParamSerializer', TV]);
-    function TV($http, $q, $scope, $location, $httpParamSerializer) {
+    angular.module('SeriesCtrl', []).controller('SeriesController', ['$http', '$q', '$scope', '$rootScope', '$location', '$httpParamSerializer', TV]);
+    function TV($http, $q, $scope, $rootScope, $location, $httpParamSerializer) {
         $scope.title = "TV Shows";
+        $scope.appName = "Potatowl";
         const KEY = '?api_key=1b1497adc03fb28cf8df7fa0cdaed980';
         const CONFIG_URL = 'https://api.themoviedb.org/3/discover/tv' + KEY + '&page=';
         const CONFIG_DESC = 'https://api.themoviedb.org/3/tv/';
         const CONFIG_SEARCH = 'https://api.themoviedb.org/3/search/tv' + KEY + '&page=';
-
+        $rootScope.$watch('user', function(newValue, oldValue) {
+            if(newValue){
+                $scope.username = newValue.username;
+                $scope.user = newValue;
+            }
+        });
         //  var $search = $('#search');
         //   $search.keypress(function (e) {
         //       console.log('ok');
@@ -95,7 +101,24 @@
             });
         };
         $scope.addlike = function (id) {
-            console.log("adding this to your likes" + id);
+            // console.log("adding this to your likes" + id, $rootScope.user,$rootScope.user.id);
+            $http({
+                method: 'POST',
+                url: '/likes/add/',
+                data: $.param({user_id: $rootScope.user._id, serie_id: id}),
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function successCallback(response) {
+                // console.log("ho hi",response.data);
+                // $location.path('/likes');
+            }, function errorCallback(response) {
+                $scope.errorMessage = response.data;
+            });
+        };
+
+        $scope.alreadyLiked = function(id) {
+            if(!$rootScope.likes) return false;
+            // console.log("looking for this "+id + "in " + $rootScope.likes + " --" + bool);
+            return $rootScope.likes.indexOf(""+id) > -1;
         };
 
         init();

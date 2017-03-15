@@ -24,5 +24,5 @@ module.exports.removeLike = function(newUser, callback){
 
 module.exports.getUserLikes = function(id, callback){
     var query = {user_id: id};
-    Like.find(query, callback);
+    Like.find(query, callback).select('serie_id -_id');
 }
