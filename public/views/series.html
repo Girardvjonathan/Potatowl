@@ -2,7 +2,7 @@
     <h1>{{title}}</h1>
     <div class="row" ng-repeat="(rowIndex, value) in media.results  as elem"
          ng-if="rowIndex % 4 == 0">
-        <div class="col-md-3 " ng-repeat="elIdx in [0,1,2,3]" ng-if="elem[rowIndex+elIdx]">
+        <div class="col-md-3 " ng-repeat="elIdx in [0,1,2,3]" ng-if="elem[rowIndex+elIdx]" id="{{elem[rowIndex+elIdx].id}}">
             <h3 class="title">{{elem[rowIndex+elIdx].name}}</h3>
             <button class="btn-default" ng-if="user && !alreadyLiked(elem[rowIndex+elIdx].id)" ng-click="addlike(elem[rowIndex+elIdx].id)"><i class="fa fa-plus" aria-hidden="true"></i>Add to your likes</button>
             <!-- Not optimale doing twice the work-->

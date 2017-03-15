@@ -28,6 +28,27 @@ router.post('/add', ensureAuthenticated, function(req, res) {
     }
 });
 
+router.post('/remove', ensureAuthenticated, function(req, res) {
+    var user_id = req.body.user_id;
+    var serie_id = req.body.serie_id;
+
+    // Validation
+    if(!user_id || !serie_id){
+        //put good http code
+        res.status(401);
+        res.send(JSON.stringify({"error":"missing field"}));
+    } else {
+
+
+        Like.getLikeBySerieId(serie_id, function(err, like){
+            if(err) throw err;
+            like.remove();
+        });
+
+        return res.send(200);
+    }
+});
+
 router.get('/getAll', ensureAuthenticated, function(req, res) {
     var user_id = req.headers.user_id;
     console.log(user_id);

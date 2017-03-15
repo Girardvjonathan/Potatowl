@@ -18,6 +18,11 @@ module.exports.addLike = function(newLike, callback){
 
 }
 
+module.exports.getLikeBySerieId = function(serie_id, callback){
+    var query = {serie_id: serie_id};
+    Like.findOne(query, callback);
+}
+
 module.exports.removeLike = function(newUser, callback){
 
 }

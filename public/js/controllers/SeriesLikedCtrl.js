@@ -52,6 +52,20 @@
             console.log("go to description page")
         };
 
+        $scope.removeLiked = function (id) {
+            $http({
+                method: 'POST',
+                url: '/likes/remove/',
+                data: $.param({user_id: $rootScope.user._id, serie_id: id}),
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function successCallback(response) {
+                //Remove the div from the user view
+                document.getElementById(id).innerHTML = "";
+            }, function errorCallback(response) {
+                $scope.errorMessage = response.data;
+            });
+        };
+
         init();
     }
 })();
