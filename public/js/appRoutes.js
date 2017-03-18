@@ -11,9 +11,15 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
             templateUrl: 'views/login.html',
             controller: 'MainController'
         })
+
         .when('/register', {
             templateUrl: 'views/register.html',
             controller: 'MainController'
+        })
+
+        .when('/series/:id', {
+            templateUrl: 'views/seriesDetails.html',
+            controller: 'SeriesDetailsController as detailsCtrl'
         })
 
         .when('/series', {

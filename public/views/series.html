@@ -3,13 +3,14 @@
     <div class="row" ng-repeat="(rowIndex, value) in media.results  as elem"
          ng-if="rowIndex % 4 == 0">
         <div class="col-md-3 " ng-repeat="elIdx in [0,1,2,3]" ng-if="elem[rowIndex+elIdx]" id="{{elem[rowIndex+elIdx].id}}">
-            <h3 class="title">{{elem[rowIndex+elIdx].name}}</h3>
+            <h3 class="title"><a ng-href="/series/{{elem[rowIndex+elIdx].id}}">{{elem[rowIndex+elIdx].name}}</a></h3>
+            <a ng-href="/series/{{elem[rowIndex+elIdx].id}}">
+                <img class="img-responsive portfolio-item resultImage"
+                    ng-src="{{getPosterMedium(elem[rowIndex+elIdx].poster_path)}}" alt="">
+            </a>
             <button class="btn-default" ng-if="user && !alreadyLiked(elem[rowIndex+elIdx].id)" ng-click="addlike(elem[rowIndex+elIdx].id)"><i class="fa fa-plus" aria-hidden="true"></i>Add to your likes</button>
             <!-- Not optimale doing twice the work-->
             <h4 ng-if="alreadyLiked(elem[rowIndex+elIdx].id)"> <i class="icon-star"></i>You like this serie</h4>
-
-            <img class="img-responsive portfolio-item resultImage"
-                 ng-src="{{getPosterMedium(elem[rowIndex+elIdx].poster_path)}}" alt="">
         </div>
     </div>
     <div>
