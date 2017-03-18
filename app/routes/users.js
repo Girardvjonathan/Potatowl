@@ -98,12 +98,10 @@ router.post('/login', function(req, res, next) {
     //     // res.redirect('/likes');
 });
 
-router.get('/logout', function(req, res){
-    req.logout();
+	router.get('/logout', function(req, res) {
+	  req.logout();
+	  res.redirect('/');
+	});
 
-    req.flash('success_msg', 'You are logged out');
-
-    res.redirect('/');
-});
 
 module.exports = router;
