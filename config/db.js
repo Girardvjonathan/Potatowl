@@ -99,7 +99,7 @@ module.exports = {
          * Users *
          *********/
         let usersSchema = new Schema({
-            name: String,
+            username: String,
             email: String,
             series: [seriesSchema],
             watched_episodes: [episodesSchema],
@@ -109,7 +109,7 @@ module.exports = {
         let User = mongoose.model('User', usersSchema);
 
         // init user
-        let user1 = new User({ name: 'User1'});
+        let user1 = new User({ username: 'User1'});
 
         // add series to user
         user1.series.push(fringeSeries);

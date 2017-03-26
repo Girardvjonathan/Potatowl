@@ -42,8 +42,8 @@
 			<li><a href="/seriesDetails">Details</a></li>
 			<li ng-if="!user"><a href="/login">Login</a></li>
 			<li ng-if="!user"><a href="/register">Register</a></li>
-			<li ng-if="username" class="pull-right"><a href="#" ng-controller="SeriesController">Hi {{username}}</a></li>
-			<li ng-controller="MainController" ng-if="user"><a href ng-controller="MainController" ng-click="logout()">Logout</a></li>
+			<li ng-if="user"><a href="#" ng-click="logout()">Log out</a></li>
+			<li ng-if="user"><a href="#" ng-controller="MainController">Hi {{username}}</a></li>
 		</ul>
 	</nav>
 

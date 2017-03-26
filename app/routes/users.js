@@ -5,17 +5,14 @@ var LocalStrategy = require('passport-local').Strategy;
 
 var User = require('../models/users');
 
-
 // Register User
 router.post('/register', function(req, res){
-    var name = req.body.name;
     var email = req.body.email;
     var username = req.body.username;
     var password = req.body.password;
     var password2 = req.body.password2;
 
     // Validation
-    req.checkBody('name', 'Name is required').notEmpty();
     req.checkBody('email', 'Email is required').notEmpty();
     req.checkBody('email', 'Email is not valid').isEmail();
     req.checkBody('username', 'Username is required').notEmpty();
@@ -28,20 +25,25 @@ router.post('/register', function(req, res){
         res.send(JSON.stringify({"failed":"failed"}));
     } else {
         var newUser = new User({
-            name: name,
             email:email,
             username: username,
             password: password
         });
 
         User.createUser(newUser, function(err, user){
-            if(err) throw err;
-            console.log(user);
+            if(err) {
+            	console.log(err);
+            }
+            else {
+                 req.login(user, function (err) {
+                	 if (!err){
+                		 res.redirect('/');
+                     } else {
+                    	 console.log(err);
+                     }
+                   });
+              }
         });
-
-        req.flash('success_msg', 'You are registered and can now login');
-
-        res.redirect('/');
     }
 });
 
@@ -91,11 +93,6 @@ router.post('/login', function(req, res, next) {
             return res.send(JSON.stringify(user));
         });
     })(req, res, next);
-    // {successRedirect:'/likes', failureRedirect:'/login?error=true',failureFlash: true}),
-    // function(req, res) {
-    //     console.log("it worked");
-    //     res.sendStatus(200);
-    //     // res.redirect('/likes');
 });
 
 	router.get('/logout', function(req, res) {
