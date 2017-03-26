@@ -1,7 +1,7 @@
 (function () {
     'use strict';
-	angular.module('SeriesDetailsCtrl', []).controller('SeriesDetailsController', ['$http', '$q', '$scope', '$location', '$httpParamSerializer', '$routeParams', seriesDetails]);
-	function seriesDetails($http, $q, $scope, $location, $httpParamSerializer, $routeParams) {
+	angular.module('SeriesDetailsCtrl', []).controller('SeriesDetailsController', ['$http', '$q', '$scope', '$httpParamSerializer', '$routeParams', seriesDetails]);
+	function seriesDetails($http, $q, $scope, $httpParamSerializer, $routeParams) {
 		const KEY = '?api_key=1b1497adc03fb28cf8df7fa0cdaed980';
 		const CONFIG_DESC = 'https://api.themoviedb.org/3/tv/';
 
