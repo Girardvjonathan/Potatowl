@@ -15,15 +15,31 @@
         </div>
     </div>
 </div>
-    <div class="container">
-        <h2>Details</h2>
-        <ul class="list-group">
-            <li class="list-group-item"><strong>Status : </strong>{{status}}</li>
-            <li class="list-group-item"><strong>Networks : </strong>{{networks}}</li>
-            <li class="list-group-item"><strong>First aired : </strong>{{first_air_date}}</li>
-            <li class="list-group-item"><strong>Episode runtimes (minutes) : </strong>{{episode_run_times}}</li>
-            <li class="list-group-item"><strong>Genres : </strong>{{genres}}</li>
-        </ul>
-    </div>
+<div class="container">
+    <h2>Details</h2>
+    <ul class="list-group">
+        <li class="list-group-item"><strong>Status : </strong>{{status}}</li>
+        <li class="list-group-item"><strong>Networks : </strong>{{networks}}</li>
+        <li class="list-group-item"><strong>First aired : </strong>{{first_air_date}}</li>
+        <li class="list-group-item"><strong>Episode runtimes (minutes) : </strong>{{episode_run_times}}</li>
+        <li class="list-group-item"><strong>Genres : </strong>{{genres}}</li>
+    </ul>
+</div>
 
-
+<div class="container">
+    <h2>Episodes</h2>
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="season in seasons">
+            <strong>Season {{season.season_number}}</strong>
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="episode in season.episodes">
+                    <strong>Episode {{episode.episode_number}} : </strong>{{episode.name}}<br>
+                    <strong>Aired on : </strong>{{episode.air_date}}<strong><br>
+                    Users rating : </strong>{{episode.vote_average}}<strong><br>
+                    Vote count : </strong>{{episode.vote_count}}<br><br>
+                    <strong>Summary : </strong>{{episode.overview ? episode.overview : 'No summary available'}}
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
