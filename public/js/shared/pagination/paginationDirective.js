@@ -1,8 +1,8 @@
 /**
  * Created by jgirard-viau on 2/4/15.
  */
-(function () {
-    angular.module('shared').directive('myPagination', Pagination);
+
+angular.module('PaginationDirective', []).directive('myPagination', Pagination);
     function Pagination(){
         return {
             restrict: 'E',
@@ -40,8 +40,7 @@
                 adjust();
                 scope.$watch('page', adjust);
             },
-            templateUrl: 'assets/partials/shared/pagination/pagination.tpl.html',
+            templateUrl: 'views/pagination.tpl.html',
             replace: true
         };
     }
-})();
