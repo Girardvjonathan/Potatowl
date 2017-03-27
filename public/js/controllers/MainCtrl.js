@@ -5,9 +5,11 @@ angular.module('MainCtrl', []).controller('MainController', function($http, $sco
 	
 	if($rootScope.user != null){
    	    $scope.username = $rootScope.user.username;
-   		console.log('username =' + $scope.username);
+    } else if ($location.path() == "/profile") {
+        $location.path( "/login" );
     }
-    
+
+
     if($rootScope.likes) {
 	    if($rootScope.likes != null){
 	        $scope.numberSeries = $rootScope.likes.length;
@@ -23,7 +25,6 @@ angular.module('MainCtrl', []).controller('MainController', function($http, $sco
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
          }).then(function successCallback(response) {
             $rootScope.user = response.data;
-        	
         	if($rootScope.user != null){
            	    $scope.username = $rootScope.user.username;
             }
