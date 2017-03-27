@@ -8,7 +8,7 @@ module.exports = function(app) {
 	app.get('/', function(req, res) {
 		res.sendfile('./public/index.html');
 	});
-
+	
     // Init db with user
     app.get('/initdb', function(req, res) {
         require('./../models/migration')();

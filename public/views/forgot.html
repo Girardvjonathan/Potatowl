@@ -1,0 +1,9 @@
+<h2 class="page-header">Reset Password</h2>
+{{errorMessage}}
+<form name="resetPasswordForm">
+    <div class="form-group">
+        <label>Email</label>
+        <input type="text" name="email" class="form-control" ng-model="user.email" placeholder="Email">
+    </div>
+    <button class="btn btn-default" ng-click="resetPassword()">Submit</button>
+</form>

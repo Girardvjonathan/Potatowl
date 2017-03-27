@@ -51,11 +51,9 @@ router.post('/remove', ensureAuthenticated, function(req, res) {
 
 router.get('/getAll', ensureAuthenticated, function(req, res) {
     var user_id = req.headers.user_id;
-    console.log(user_id);
     // var serie_id = req.body.serie_id;
     Like.getUserLikes(user_id,function (err, likes) {
         if(err) throw err;
-        // console.log(likes);
         return res.send(JSON.stringify(likes));
     })
 
@@ -66,7 +64,6 @@ function ensureAuthenticated(req, res, next){
         return next();
     } else {
         //req.flash('error_msg','You are not logged in');
-        console.log("not logged in");
         res.status(401);
         res.send(JSON.stringify({"error":"not logged in"}));
     }

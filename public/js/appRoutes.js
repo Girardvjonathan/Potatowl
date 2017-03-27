@@ -40,6 +40,14 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
             templateUrl: 'views/profile.html',
             controller: 'MainController'
         })
+        .when('/resetPassword/:email', {
+            templateUrl: 'views/resetPassword.html',
+            controller: 'ResetPasswordController as resetPasswordCtrl'
+        })
+        .when('/forgot', {
+            templateUrl: 'views/forgot.html',
+            controller: 'ResetPasswordController as resetPasswordCtrl'
+        })
         .when('/seriesDetails', {
             templateUrl: 'views/seriesDetails.html',
             controller: 'SeriesLikedCtrl as likedCtrl'

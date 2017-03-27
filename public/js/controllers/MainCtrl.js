@@ -1,11 +1,9 @@
 angular.module('MainCtrl', []).controller('MainController', function($http, $scope, $location, $rootScope) {
 
 	$scope.tagline = 'Series tracker application';
-
 	
 	if($rootScope.user != null){
    	    $scope.username = $rootScope.user.username;
-   		console.log('username =' + $scope.username);
     }
     
     if($rootScope.likes) {
@@ -59,7 +57,7 @@ angular.module('MainCtrl', []).controller('MainController', function($http, $sco
             $scope.errorMessage = "Something wrong happen";
         });
     };
-      
+    
     function valuesToArray(obj) {
         return Object.keys(obj).map(function (key) { return obj[key]['serie_id']; });
     }
