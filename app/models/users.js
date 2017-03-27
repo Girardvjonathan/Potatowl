@@ -3,22 +3,28 @@ var bcrypt = require('bcryptjs');
 
 // User Schema
 var UserSchema = mongoose.Schema({
-	username : {
-		type : String,
-		index : true
-	},
-	password : {
-		type : String
-	},
-	email : {
-		type : String
-	},
-	resetPasswordToken : {
-		type : String
-	},
-	resetPasswordExpires : {
-		type : Date
-	}
+    username: {
+        type: String,
+        index:true,
+        unique: true
+    },
+    password: {
+        type: String
+    },
+    email: {
+        type: String,
+        unique: true
+    },
+    role: {
+        type: String,
+        default: 'user'
+    },
+    resetPasswordToken : {
+        type : String
+    },
+    resetPasswordExpires : {
+        type : Date
+    }
 });
 
 var User = module.exports = mongoose.model('User', UserSchema);

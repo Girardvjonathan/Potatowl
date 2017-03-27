@@ -75,24 +75,24 @@
             return 'https://image.tmdb.org/t/p/w500/' + url;
         };
 
-        // $scope.onChange = function (number) {
-        //     //switch case
-        //     switch (number) {
-        //         case 0:
-        //             if ($scope.page > 1) $scope.page--;
-        //             loadData();
-        //             break;
-        //         case 6:
-        //             if ($scope.page < $scope.maxPage) $scope.page++;
-        //             loadData();
-        //             break;
-        //         default:
-        //             if (number > 0 && number < $scope.maxPage) {
-        //                 $scope.page = number;
-        //                 loadData();
-        //             }
-        //     }
-        // };
+        $scope.onChange = function (number) {
+            //switch case
+            switch (number) {
+                case 0:
+                    if ($scope.page > 1) $scope.page--;
+                    loadData();
+                    break;
+                case 6:
+                    if ($scope.page < $scope.maxPage) $scope.page++;
+                    loadData();
+                    break;
+                default:
+                    if (number > 0 && number < $scope.maxPage) {
+                        $scope.page = number;
+                        loadData();
+                    }
+            }
+        };
 
         // https://api.themoviedb.org/3/tv/12?api_key=1b1497adc03fb28cf8df7fa0cdaed980
         $scope.getMoreInfo = function getMoreInfo(id) {
