@@ -1,8 +1,10 @@
 (function () {
     'use strict';
-    angular.module('SeriesLiked', []).controller('SeriesLikedCtrl', ['$http', '$rootScope', '$q', '$scope', '$location', '$httpParamSerializer', TV]);
-    function TV($http, $rootScope, $q, $scope, $location, $httpParamSerializer) {
-
+    angular.module('SeriesLiked', []).controller('SeriesLikedCtrl', ['$http', '$rootScope', '$q', '$scope', '$location', '$httpParamSerializer','$route', TV]);
+    function TV($http, $rootScope, $q, $scope, $location, $httpParamSerializer, $route) {
+        if(!$rootScope.user) {
+            $location.path( "/login" );
+        }
         $scope.title = "Liked TV Shows";
         $scope.likedSeries = [];
         const CONFIG_DESC = 'https://api.themoviedb.org/3/tv/';
@@ -48,11 +50,12 @@
             return 'https://image.tmdb.org/t/p/w500/' + url;
         };
 
-        $scope.getMoreInfo = function getMoreInfo(id) {
-            console.log("go to description page")
-        };
 
         $scope.removeLiked = function (id) {
+            var index = $rootScope.likes.indexOf(id.toString());
+            if (index > -1) {
+                $rootScope.likes.splice(index, 1);
+            }
             $http({
                 method: 'POST',
                 url: '/likes/remove/',
@@ -60,7 +63,8 @@
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             }).then(function successCallback(response) {
                 //Remove the div from the user view
-                document.getElementById(id).innerHTML = "";
+                // document.getElementById(id).innerHTML = "";
+                $route.reload();
             }, function errorCallback(response) {
                 $scope.errorMessage = response.data;
             });

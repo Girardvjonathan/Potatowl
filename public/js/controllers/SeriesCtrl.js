@@ -2,7 +2,8 @@
     'use strict';
     angular.module('SeriesCtrl', []).controller('SeriesController', ['$http', '$q', '$scope', '$rootScope', '$location', '$httpParamSerializer', TV]);
     function TV($http, $q, $scope, $rootScope, $location, $httpParamSerializer) {
-        $scope.title = "TV Shows";
+        $scope.title = "Popular TV Shows";
+        if($location.search().query) $scope.title = "Results for \""+$location.search().query+"\"";
         $scope.appName = "Potatowl";
         const KEY = '?api_key=1b1497adc03fb28cf8df7fa0cdaed980';
         const CONFIG_URL = 'https://api.themoviedb.org/3/discover/tv' + KEY + '&page=';
@@ -51,7 +52,7 @@
         function loadData() {
             var deferred = $q.defer();
             deferred.notify('Chargement de l\'information ');
-
+            //TODO on a besoin de !! ?
             $http.get((!!$location.search().query ? CONFIG_SEARCH : CONFIG_URL ) + $scope.page + "&" + $httpParamSerializer($location.search())).then(function (data) {
                 deferred.resolve(data);
             }, function (data, status, headers, config) {
@@ -102,6 +103,8 @@
         };
         $scope.addlike = function (id) {
             // console.log("adding this to your likes" + id, $rootScope.user,$rootScope.user.id);
+            $rootScope.likes.push(id);
+
             $http({
                 method: 'POST',
                 url: '/likes/add/',
@@ -118,7 +121,7 @@
         $scope.alreadyLiked = function(id) {
             if(!$rootScope.likes) return false;
             // console.log("looking for this "+id + "in " + $rootScope.likes + " --" + bool);
-            return $rootScope.likes.indexOf(""+id) > -1;
+            return $rootScope.likes.indexOf(id.toString()) > -1;
         };
 
         init();
