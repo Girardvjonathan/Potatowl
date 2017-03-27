@@ -76,20 +76,51 @@
         };
 
         $scope.onChange = function (number) {
+            console.log("helllo "+ number);
             //switch case
             switch (number) {
                 case 0:
                     if ($scope.page > 1) $scope.page--;
-                    loadData();
+                    var promise = loadData();
+                    promise.then(function (data) {
+                        data = data.data;
+                        $scope.media = data;
+                        $scope.maxPage = data.total_pages;
+                        $scope.page = data.page;
+                        $scope.totalResults = data.total_results;
+                    }, function (reason) {
+                        alert('Failed: ' + reason);
+                        $("#spinner").hide();
+                    });
                     break;
                 case 6:
                     if ($scope.page < $scope.maxPage) $scope.page++;
-                    loadData();
+                    var promise = loadData();
+                    promise.then(function (data) {
+                        data = data.data;
+                        $scope.media = data;
+                        $scope.maxPage = data.total_pages;
+                        $scope.page = data.page;
+                        $scope.totalResults = data.total_results;
+                    }, function (reason) {
+                        alert('Failed: ' + reason);
+                        $("#spinner").hide();
+                    });
                     break;
                 default:
                     if (number > 0 && number < $scope.maxPage) {
                         $scope.page = number;
-                        loadData();
+                        var promise = loadData();
+                        promise.then(function (data) {
+                            data = data.data;
+                            $scope.media = data;
+                            $scope.maxPage = data.total_pages;
+                            $scope.page = data.page;
+                            $scope.totalResults = data.total_results;
+                        }, function (reason) {
+                            alert('Failed: ' + reason);
+                            $("#spinner").hide();
+                        });
                     }
             }
         };
