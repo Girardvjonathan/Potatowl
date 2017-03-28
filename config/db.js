@@ -4,6 +4,8 @@ module.exports = {
         let username = 'stapp-admin';
         let password = 'youareapirate';
         let mongodbUri = 'mongodb://' + username + ':' + password + '@ds123050.mlab.com:23050/potatowl-db';
+        // for local
+        // let mongodbUri = "mongodb://localhost/potatowl-2";
 
         let mongoose = require('mongoose');
         mongoose.connect(mongodbUri);

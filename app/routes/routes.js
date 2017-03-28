@@ -12,7 +12,7 @@ module.exports = function(app) {
     // Init db with user
     app.get('/initdb', function(req, res) {
         require('./../models/migration')();
-        res.sendfile('./public/index.html');
+        return res.send(JSON.stringify("ok"));
     });
 
     var users = require('./users');
