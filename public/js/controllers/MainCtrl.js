@@ -35,7 +35,11 @@ angular.module('MainCtrl', []).controller('MainController', function($http, $sco
             }).then(function successCallback(response) {
                 $rootScope.likes = valuesToArray(response.data);
                 $rootScope.numberSeries = $rootScope.likes.length;
-                $location.path('/likes');
+                if($rootScope.user.role == "admin"){
+                    $location.path('/series');
+                } else {
+                    $location.path('/likes');
+                }
 
             }, function errorCallback() {
                 $scope.errorMessage = "Oops ?";

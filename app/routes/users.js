@@ -28,9 +28,7 @@ router.post('/register', function(req, res) {
 	var errors = req.validationErrors();
 
 	if (errors) {
-		res.send(JSON.stringify({
-			"failed" : "failed"
-		}));
+        res.send(JSON.stringify(errors));
 	} else {
 		var newUser = new User({
 			email : email,
@@ -38,13 +36,13 @@ router.post('/register', function(req, res) {
 			password : password
 		});
 
-		User.createUser(newUser, function(err, user) {
+        User.createUser(newUser, function(err, user) {
 			if (err) {
 				console.log(err);
 			} else {
 				req.login(user, function(err) {
 					if (!err) {
-						res.redirect('/');
+						res.redirect('/likes');
 					} else {
 						console.log(err);
 					}

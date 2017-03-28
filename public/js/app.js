@@ -1,1 +1,1 @@
-angular.module('app', ['ngRoute', 'appRoutes', 'ResetPasswordCtrl', 'MainCtrl', 'SeriesCtrl', 'SeriesDetailsCtrl', 'SeriesService', 'PaginationDirective', 'SearchCtrl', 'SeriesLiked']);
+angular.module('app', ['ngRoute', 'appRoutes', 'ResetPasswordCtrl', 'MainCtrl', 'SeriesCtrl','SendNotifCtrl', 'SeriesDetailsCtrl', 'SeriesService', 'PaginationDirective', 'SearchCtrl', 'SeriesLiked']);

@@ -2,7 +2,7 @@
     'use strict';
     angular.module('SeriesDetailsCtrl', []).controller('SeriesDetailsController', ['$http', '$q', '$scope', '$httpParamSerializer', '$routeParams', '$location', '$rootScope', seriesDetails]);
     function seriesDetails($http, $q, $scope, $httpParamSerializer, $routeParams, $location, $rootScope) {
-        if(!$rootScope.user) {
+        if(!$routeParams.id) {
             $location.path( "/login" );
         }
         const KEY = '?api_key=1b1497adc03fb28cf8df7fa0cdaed980';

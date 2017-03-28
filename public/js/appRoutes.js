@@ -19,22 +19,27 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 
         .when('/series/:id', {
             templateUrl: 'views/seriesDetails.html',
-            controller: 'SeriesDetailsController as detailsCtrl'
+            controller: 'SeriesDetailsController'
+        })
+
+        .when('/notification/:id/:name', {
+            templateUrl: 'views/sendNotification.html',
+            controller: 'NotificationController'
         })
 
         .when('/series', {
             templateUrl: 'views/series.html',
-            controller: 'SeriesController as media'
+            controller: 'SeriesController'
         })
 
         .when('/search', {
             templateUrl: 'views/search.html',
-            controller: 'SearchController as searchCtrl'
+            controller: 'SearchController'
         })
 
         .when('/likes', {
             templateUrl: 'views/seriesLiked.html',
-            controller: 'SeriesLikedCtrl as liked'
+            controller: 'SeriesLikedCtrl'
         })
         .when('/profile', {
             templateUrl: 'views/profile.html',
@@ -42,15 +47,15 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
         })
         .when('/resetPassword/:email', {
             templateUrl: 'views/resetPassword.html',
-            controller: 'ResetPasswordController as resetPasswordCtrl'
+            controller: 'ResetPasswordController'
         })
         .when('/forgot', {
             templateUrl: 'views/forgot.html',
-            controller: 'ResetPasswordController as resetPasswordCtrl'
+            controller: 'ResetPasswordController'
         })
         .when('/seriesDetails', {
             templateUrl: 'views/seriesDetails.html',
-            controller: 'SeriesLikedCtrl as likedCtrl'
+            controller: 'SeriesLikedCtrl'
         });
 
 

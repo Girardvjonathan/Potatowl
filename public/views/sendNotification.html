@@ -1,0 +1,14 @@
+<h2 class="page-header">Send notification</h2>
+<form id="notif">
+    <div class="form-group">
+        <label>Serie</label>
+        <p>{{name}}</p>
+    </div>
+    <h3>Message</h3>
+
+    <div class="form-group">
+        <textarea rows="6" cols="50" name="message">{{message}}</textarea>
+    </div>
+    <input type="hidden" name="serie_id" value="{{id}}">
+    <button class="btn btn-default" ng-click="sendNotification()">Submit</button>
+</form>

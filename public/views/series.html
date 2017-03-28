@@ -2,15 +2,24 @@
     <h1>{{title}}</h1>
     <div class="row" ng-repeat="(rowIndex, value) in media.results  as elem"
          ng-if="rowIndex % 4 == 0">
-        <div class="col-md-3 " ng-repeat="elIdx in [0,1,2,3]" ng-if="elem[rowIndex+elIdx]" id="{{elem[rowIndex+elIdx].id}}">
-            <h3 class="serie-title"><a ng-href="/series/{{elem[rowIndex+elIdx].id}}">{{elem[rowIndex+elIdx].name}}</a></h3>
+        <div class="col-md-3 " ng-repeat="elIdx in [0,1,2,3]" ng-if="elem[rowIndex+elIdx]"
+             id="{{elem[rowIndex+elIdx].id}}">
+            <h3 class="serie-title"><a ng-href="/series/{{elem[rowIndex+elIdx].id}}">{{elem[rowIndex+elIdx].name}}</a>
+            </h3>
             <a ng-href="/series/{{elem[rowIndex+elIdx].id}}">
                 <img class="img-responsive portfolio-item resultImage"
-                    ng-src="{{getPosterMedium(elem[rowIndex+elIdx].poster_path)}}" alt="">
+                     ng-src="{{getPosterMedium(elem[rowIndex+elIdx].poster_path)}}" alt="">
             </a>
-            <button class="btn-default" ng-if="user && !alreadyLiked(elem[rowIndex+elIdx].id)" ng-click="addlike(elem[rowIndex+elIdx].id)"><i class="fa fa-plus" aria-hidden="true"></i>Add to your likes</button>
+            <button type="button" class="btn btn-success"
+                    ng-if="user && user.role!='admin' && !alreadyLiked(elem[rowIndex+elIdx].id)"
+                    ng-click="addlike(elem[rowIndex+elIdx].id)"><i class="fa fa-plus" aria-hidden="true"></i>Add to your
+                likes
+            </button>
             <!-- Not optimale doing twice the work-->
-            <h4 ng-if="alreadyLiked(elem[rowIndex+elIdx].id)"> <i class="icon-star"></i>You like this serie</h4>
+            <h4 ng-if="user.role!='admin' && alreadyLiked(elem[rowIndex+elIdx].id)"><i class="icon-star"></i>You like
+                this serie</h4>
+            <a ng-href="/notification/{{elem[rowIndex+elIdx].id}}/{{elem[rowIndex+elIdx].name}}" ng-if="user.role=='admin'"><i class="fa fa-inbox" aria-hidden="true"></i>Send notification</a>
+
         </div>
     </div>
     <div>
@@ -20,4 +29,4 @@
     </div>
 </div>
 
- <my-pagination class="pager" on-change="onChange(number)" max-page="maxPage" page="page"></my-pagination>
+<my-pagination class="pager" on-change="onChange(number)" max-page="maxPage" page="page"></my-pagination>
