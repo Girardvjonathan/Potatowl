@@ -76,7 +76,6 @@
         };
 
         $scope.onChange = function (number) {
-            console.log("helllo "+ number);
             //switch case
             switch (number) {
                 case 0:
@@ -134,8 +133,9 @@
         };
         $scope.addlike = function (id) {
             // console.log("adding this to your likes" + id, $rootScope.user,$rootScope.user.id);
-            $rootScope.likes.push(id);
+            $rootScope.likes.push(id.toString());
 
+            // document.getElementById('add-'+id).outerHTML = "<i class=\"icon-star\"></i>You like this serie";
             $http({
                 method: 'POST',
                 url: '/likes/add/',

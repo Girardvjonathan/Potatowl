@@ -38,8 +38,6 @@ router.post('/remove', ensureAuthenticated, function(req, res) {
         res.status(401);
         res.send(JSON.stringify({"error":"missing field"}));
     } else {
-
-
         Like.getLikeBySerieId(serie_id, function(err, like){
             if(err) throw err;
             like.remove();
@@ -56,7 +54,6 @@ router.get('/getAll', ensureAuthenticated, function(req, res) {
         if(err) throw err;
         return res.send(JSON.stringify(likes));
     })
-
 });
 
 function ensureAuthenticated(req, res, next){

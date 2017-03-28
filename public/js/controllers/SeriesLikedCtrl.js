@@ -13,7 +13,6 @@
         var init = function () {
             var series = [];
             $scope.series = series;
-
             $rootScope.likes.forEach(function (value) {
 
                var promise = loadData(value);
@@ -56,6 +55,7 @@
             if (index > -1) {
                 $rootScope.likes.splice(index, 1);
             }
+
             $http({
                 method: 'POST',
                 url: '/likes/remove/',
