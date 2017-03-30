@@ -6,23 +6,23 @@
             </a>
         </li>
         <!-- Numbered page links -->
-        <li ng-class="{bold: pageNumber1 === page}">
-            <a class="pagination" href="" ng-click="onChange({number: pageNumber1})">
+        <li>
+            <a  ng-class="{selectedPage: pageNumber1 === page}" class="pagination" href="" ng-click="onChange({number: pageNumber1})">
                 {{pageNumber1}}
             </a>
         </li>
-        <li ng-class="{bold: pageNumber2 === page}" ng-if="maxPage>1">
-            <a class="pagination"href="" ng-click="onChange({number: pageNumber2})">
+        <li ng-if="maxPage>1">
+            <a ng-class="{selectedPage: pageNumber2 === page}" class="pagination"href="" ng-click="onChange({number: pageNumber2})">
                 {{pageNumber2}}
             </a>
         </li>
-        <li ng-class="{bold: pageNumber3 === page}" ng-if="maxPage>2">
-            <a class="pagination"href="" ng-click="onChange({number: pageNumber3})">
+        <li ng-if="maxPage>2">
+            <a ng-class="{selectedPage: pageNumber3 === page}" class="pagination"href="" ng-click="onChange({number: pageNumber3})">
                 {{pageNumber3}}
             </a>
         </li>
-        <li ng-class="{bold: pageNumber4 === page}" ng-if="maxPage>3">
-            <a class="pagination"href="" ng-click="onChange({number: pageNumber4})">
+        <li  ng-if="maxPage>3">
+            <a ng-class="{selectedPage: pageNumber4 === page}" class="pagination"href="" ng-click="onChange({number: pageNumber4})">
                 {{pageNumber4}}
             </a>
         </li>

@@ -287,6 +287,10 @@ h2.page-header {
     text-align: left;
     margin-left: 10px;
 }
+.selectedPage {
+    font-weight: bold;
+    font-size: 18px;
+}
 
 @media screen and (min-width: 400px) {
     #login-form input,
