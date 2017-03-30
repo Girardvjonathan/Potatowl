@@ -1,13 +1,11 @@
-angular.module('SearchCtrl', []).controller('SearchController', function ($location, $q, $http) {
+angular.module('SearchCtrl', []).controller('SearchController', function ($location, $scope, $q, $http) {
     const KEY = '?api_key=1b1497adc03fb28cf8df7fa0cdaed980';
     const CONFIG_GENRES = 'https://api.themoviedb.org/3/genre/tv/list';
-
-    var vm = this;
 
     var init = function () {
         var promise = loadGenres();
         promise.then(function(data) {
-            vm.genres = data.data.genres;
+            $scope.genres = data.data.genres;
         }, function(reason) {
             conosle.log('Failed: ' + reason);
         });
@@ -25,56 +23,56 @@ angular.module('SearchCtrl', []).controller('SearchController', function ($locat
         return deferred.promise;
     }
 
-    vm.searchByTitle = function () {
-        if(!!vm.searchParams) {
-            if (!!vm.searchParams.title) {
-                vm.searchParams['query'] = vm.searchParams.title;
+    $scope.searchByTitle = function () {
+        if(!!$scope.searchParams) {
+            if (!!$scope.searchParams.title) {
+                $scope.searchParams['query'] = $scope.searchParams.title;
             }
 
-            delete vm.searchParams.title;
-            delete vm.searchParams.min_rating;
-            delete vm.searchParams.genres;
-            delete vm.searchParams.first_air_date;
+            delete $scope.searchParams.title;
+            delete $scope.searchParams.min_rating;
+            delete $scope.searchParams.genres;
+            delete $scope.searchParams.first_air_date;
 
-            $location.path('/series').search(vm.searchParams);
+            $location.path('/series').search($scope.searchParams);
         }
     }
 
-    vm.searchByCharacteristics = function () {
-        if(!!vm.searchParams) {
-            if (!!vm.searchParams.min_rating) {
-                vm.searchParams['vote_average.gte'] = vm.searchParams.min_rating;
+    $scope.searchByCharacteristics = function () {
+        if(!!$scope.searchParams) {
+            if (!!$scope.searchParams.min_rating) {
+                $scope.searchParams['vote_average.gte'] = $scope.searchParams.min_rating;
             }
             
-            if (!!vm.searchParams.genres) {
+            if (!!$scope.searchParams.genres) {
                 var genres = '';
 
-                for (var id in vm.searchParams.genres) {
-                    if (vm.searchParams.genres[id]) {
+                for (var id in $scope.searchParams.genres) {
+                    if ($scope.searchParams.genres[id]) {
                         genres += (id + ',');
                     }
                 }
                 
                 if(genres.length > 0) {
                     genres = genres.substring(0, genres.length - 1)
-                    vm.searchParams['with_genres'] = genres;
+                    $scope.searchParams['with_genres'] = genres;
                 }
             }
 
-            if (!!vm.searchParams.first_air_date && !!vm.searchParams.first_air_date.gte) {
-                vm.searchParams['first_air_date.gte'] = vm.searchParams.first_air_date.gte;
+            if (!!$scope.searchParams.first_air_date && !!$scope.searchParams.first_air_date.gte) {
+                $scope.searchParams['first_air_date.gte'] = $scope.searchParams.first_air_date.gte;
             }
 
-            if (!!vm.searchParams.first_air_date && !!vm.searchParams.first_air_date.lte) {
-                vm.searchParams['first_air_date.lte'] = vm.searchParams.first_air_date.lte;
+            if (!!$scope.searchParams.first_air_date && !!$scope.searchParams.first_air_date.lte) {
+                $scope.searchParams['first_air_date.lte'] = $scope.searchParams.first_air_date.lte;
             }
 
-            delete vm.searchParams.title;
-            delete vm.searchParams.min_rating;
-            delete vm.searchParams.genres;
-            delete vm.searchParams.first_air_date;
+            delete $scope.searchParams.title;
+            delete $scope.searchParams.min_rating;
+            delete $scope.searchParams.genres;
+            delete $scope.searchParams.first_air_date;
 
-            $location.path('/series').search(vm.searchParams);
+            $location.path('/series').search($scope.searchParams);
         }
     }
 
