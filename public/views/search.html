@@ -1,4 +1,4 @@
-<form>
+<form id="search-form">
     <fieldset class="form-group">
         <legend>Search by title</legend>
 
@@ -21,16 +21,16 @@
 
 <hr>
 
-<form>
+<form id="search-carac-form">
     <fieldset class="form-group">
         <legend>Search by characteristics</legend>
 
         <div class="form-group">
             <label for="min_rating">Minimum rating (0.0 - 10.0) : </label>
-            <input class="form-control" ng-model="searchParams.min_rating" type="number" name="min_rating" min="0" max="10" step="0.1" placeholder="7.5" id="min_rating">
+            <input id="rating-roller" class="form-control" ng-model="searchParams.min_rating" type="number" name="min_rating" min="0" max="10" step="0.1" placeholder="7.5" id="min_rating">
         </div>
         
-        <div class="form-group">
+        <div class="form-group form-group-check">
             <label>Genres : </label>
             <div ng-repeat="genre in genres">
                 <input class="form-control" ng-model="searchParams.genres[genre.id]" type="checkbox" name="genres" id="{{genre.id}}">
@@ -38,12 +38,12 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group form-group-date">
             <label for="release_date_after">Released on or after (yyyy-mm-dd) : </label>
             <input class="form-control" ng-model="searchParams.first_air_date.gte" type="text" name="release_date_after" min="1950" max="2017" placeholder="1980-01-01" id="release_date_after">
         </div>
 
-        <div class="form-group">
+        <div class="form-group form-group-date">
             <label for="release_date_before">Released on or before (yyyy-mm-dd) : </label>
             <input class="form-control" ng-model="searchParams.first_air_date.lte" type="text" name="release_date_before" min="1950" max="2017" placeholder="2000-01-01" id="release_date_before">
         </div>
