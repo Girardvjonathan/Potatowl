@@ -4,11 +4,11 @@
 
         <div class="form-group">
             <label for="title">Type in one or more words from the title : </label>
-            <input class="form-control" ng-model="searchCtrl.searchParams.title" type="text" name="title" placeholder="Walking Dead" id="title">
+            <input class="form-control" ng-model="searchParams.title" type="text" name="title" placeholder="Walking Dead" id="title">
         </div>
 
         <label for="sort">Sort by</label>
-        <select class="form-control" id="sort" ng-model="searchCtrl.searchParams.sort_by">
+        <select class="form-control" id="sort" ng-model="searchParams.sort_by">
             <option value="" disabled selected>Choose...</option>
             <option value="popularity.desc">Popularity</option>
             <option value="vote_average.desc">User Rating</option>
@@ -16,7 +16,7 @@
         </select>
     </fieldset>
 
-    <button type="submit" class="btn btn-primary" ng-click="searchCtrl.searchByTitle()">Search</button>
+    <button type="submit" class="btn btn-primary" ng-click="searchByTitle()">Search</button>
 </form>
 
 <hr>
@@ -27,29 +27,29 @@
 
         <div class="form-group">
             <label for="min_rating">Minimum rating (0.0 - 10.0) : </label>
-            <input class="form-control" ng-model="searchCtrl.searchParams.min_rating" type="number" name="min_rating" min="0" max="10" step="0.1" placeholder="7.5" id="min_rating">
+            <input class="form-control" ng-model="searchParams.min_rating" type="number" name="min_rating" min="0" max="10" step="0.1" placeholder="7.5" id="min_rating">
         </div>
         
         <div class="form-group">
             <label>Genres : </label>
-            <div ng-repeat="genre in searchCtrl.genres">
-                <input class="form-control" ng-model="searchCtrl.searchParams.genres[genre.id]" type="checkbox" name="genres" id="{{genre.id}}">
+            <div ng-repeat="genre in genres">
+                <input class="form-control" ng-model="searchParams.genres[genre.id]" type="checkbox" name="genres" id="{{genre.id}}">
                 <label for="{{genre.id}}">{{genre.name}}</label>
             </div>
         </div>
 
         <div class="form-group">
             <label for="release_date_after">Released on or after (yyyy-mm-dd) : </label>
-            <input class="form-control" ng-model="searchCtrl.searchParams.first_air_date.gte" type="text" name="release_date_after" min="1950" max="2017" placeholder="1980-01-01" id="release_date_after">
+            <input class="form-control" ng-model="searchParams.first_air_date.gte" type="text" name="release_date_after" min="1950" max="2017" placeholder="1980-01-01" id="release_date_after">
         </div>
 
         <div class="form-group">
             <label for="release_date_before">Released on or before (yyyy-mm-dd) : </label>
-            <input class="form-control" ng-model="searchCtrl.searchParams.first_air_date.lte" type="text" name="release_date_before" min="1950" max="2017" placeholder="2000-01-01" id="release_date_before">
+            <input class="form-control" ng-model="searchParams.first_air_date.lte" type="text" name="release_date_before" min="1950" max="2017" placeholder="2000-01-01" id="release_date_before">
         </div>
 
         <label for="sort">Sort by</label>
-        <select class="form-control" id="sort" ng-model="searchCtrl.searchParams.sort_by">
+        <select class="form-control" id="sort" ng-model="searchParams.sort_by">
             <option value="" disabled selected>Choose...</option>
             <option value="popularity.desc">Popularity</option>
             <option value="vote_average.desc">User Rating</option>
@@ -57,5 +57,5 @@
         </select>
     </fieldset>
 
-    <button type="submit" class="btn btn-primary" ng-click="searchCtrl.searchByCharacteristics()">Search</button>
+    <button type="submit" class="btn btn-primary" ng-click="searchByCharacteristics()">Search</button>
 </form>
