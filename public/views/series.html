@@ -9,7 +9,7 @@
             </a>
             <button type="button" class="btn btn-success btn-snap-bottom" id="add-{{elem[rowIndex+elIdx].id}}"
                     ng-if="user && user.role!='admin' && !alreadyLiked(elem[rowIndex+elIdx].id)"
-                    ng-click="addlike(elem[rowIndex+elIdx].id)">
+                    ng-click="addLike(elem[rowIndex+elIdx].id)">
                 <i class="fa fa-plus" aria-hidden="true"></i>
                 Add to your likes
             </button>

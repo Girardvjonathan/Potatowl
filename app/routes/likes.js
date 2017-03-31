@@ -40,7 +40,9 @@ router.post('/remove', ensureAuthenticated, function(req, res) {
     } else {
         Like.getLikeBySerieId(serie_id, function(err, like){
             if(err) throw err;
-            like.remove();
+            if(like != null){
+           		like.remove();
+            }
         });
 
         return res.send(200);

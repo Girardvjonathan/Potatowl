@@ -1,44 +1,54 @@
 <div class="jumbotron text-center">
-    <div class="row btn-left">
-        <button type="button" class="btn btn-primary">Follow this show</button>
-    </div>
-    <div class="row text-center">
-        <h2 class="title">{{title}}</h2>
-        <img class="center-block"
-             ng-src="{{poster_path}}" alt="">
-    </div>
-    <div class="row text-center">
-        <h5>Average score: {{vote_average}}</h5>
-        <h3>Overview</h3>
-        <p>{{overview}}</p>
-    </div>
+	<button type="button" class="btn btn-primary"
+		id="add-{{id}}"
+		ng-if="user && user.role!='admin' && !alreadyLiked()"
+		ng-click="addLike()">
+		<i class="fa fa-plus" aria-hidden="true"></i> Add to your likes
+	</button>
+	<button type="button" class="btn btn-primary"
+		id="remove-{{id}}"
+		ng-if="user && user.role!='admin' && alreadyLiked()"
+		ng-click="removeLiked()">
+		<i class="fa fa-plus" aria-hidden="true"></i> Remove from your likes
+	</button>
+	
+	<div class="row text-center">
+		<h2 class="title">{{title}}</h2>
+		<img class="center-block" ng-src="{{poster_path}}" alt="">
+	</div>
+	<div class="row text-center">
+		<h5>Average score: {{vote_average}}</h5>
+		<h3>Overview</h3>
+		<p>{{overview}}</p>
+	</div>
 </div>
 
 <div class="container container-details">
-    <h2>Details</h2>
-    <ul class="list-group">
-        <li class="list-group-item"><strong>Status : </strong>{{status}}</li>
-        <li class="list-group-item"><strong>Networks : </strong>{{networks}}</li>
-        <li class="list-group-item"><strong>First aired : </strong>{{first_air_date}}</li>
-        <li class="list-group-item"><strong>Episode runtimes (minutes) : </strong>{{episode_run_times}}</li>
-        <li class="list-group-item"><strong>Genres : </strong>{{genres}}</li>
-    </ul>
+	<h2>Details</h2>
+	<ul class="list-group">
+		<li class="list-group-item"><strong>Status : </strong>{{status}}</li>
+		<li class="list-group-item"><strong>Networks : </strong>{{networks}}</li>
+		<li class="list-group-item"><strong>First aired : </strong>{{first_air_date}}</li>
+		<li class="list-group-item"><strong>Episode runtimes
+				(minutes) : </strong>{{episode_run_times}}</li>
+		<li class="list-group-item"><strong>Genres : </strong>{{genres}}</li>
+	</ul>
 </div>
 
 <div class="container container-episodes">
-    <h2>Episodes</h2>
-    <ul class="list-group">
-        <li class="list-group-item" ng-repeat="season in seasons">
-            <strong>Season {{season.season_number}}</strong>
-            <ul class="list-group">
-                <li class="list-group-item" ng-repeat="episode in season.episodes">
-                    <strong>Episode {{episode.episode_number}} : </strong>{{episode.name}}<br>
-                    <strong>Aired on : </strong>{{episode.air_date}}<strong><br>
-                    Users rating : </strong>{{episode.vote_average}}<strong><br>
-                    Vote count : </strong>{{episode.vote_count}}<br><br>
-                    <strong>Summary : </strong>{{episode.overview ? episode.overview : 'No summary available'}}
-                </li>
-            </ul>
-        </li>
-    </ul>
+	<h2>Episodes</h2>
+	<ul class="list-group">
+		<li class="list-group-item" ng-repeat="season in seasons"><strong>Season
+				{{season.season_number}}</strong>
+			<ul class="list-group">
+				<li class="list-group-item" ng-repeat="episode in season.episodes">
+					<strong>Episode {{episode.episode_number}} : </strong>{{episode.name}}<br>
+					<strong>Aired on : </strong>{{episode.air_date}}<strong><br>
+						Users rating : </strong>{{episode.vote_average}}<strong><br>
+						Vote count : </strong>{{episode.vote_count}}<br>
+				<br> <strong>Summary : </strong>{{episode.overview ?
+					episode.overview : 'No summary available'}}
+				</li>
+			</ul></li>
+	</ul>
 </div>
