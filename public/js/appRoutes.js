@@ -49,6 +49,10 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
             templateUrl: 'views/resetPassword.html',
             controller: 'ResetPasswordController'
         })
+          .when('/register/:message', {
+            templateUrl: 'views/register.html',
+            controller: 'MainController'
+        })
         .when('/forgot', {
             templateUrl: 'views/forgot.html',
             controller: 'ResetPasswordController'

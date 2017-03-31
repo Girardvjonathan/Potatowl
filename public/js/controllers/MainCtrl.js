@@ -1,20 +1,44 @@
-angular.module('MainCtrl', []).controller('MainController', function($http, $scope, $location, $rootScope) {
+angular.module('MainCtrl', []).controller('MainController', function($http, $routeParams, $scope, $location, $rootScope) {
 
 	$scope.tagline = 'Series tracker application';
-	
+
+	if($routeParams.message != null){
+		var msg = JSON.parse($routeParams.message);
+		$rootScope.errorRegisterMessage = ''; 
+
+		for (var i = 0; i < msg.length; i++) {
+			console.log(i);
+			$rootScope.errorRegisterMessage += msg[i]['msg'] += '  ';
+		}
+	}
+	if($rootScope.user != null){
+   	    $scope.user = $rootScope.user;
+    }
 	if($rootScope.user != null){
    	    $scope.username = $rootScope.user.username;
     } else if ($location.path() == "/profile") {
         $location.path( "/login" );
     }
 
-
     if($rootScope.likes) {
 	    if($rootScope.likes != null){
 	        $scope.numberSeries = $rootScope.likes.length;
 	    }
     }
-
+    
+    $scope.register = function () {
+        $http({
+            method: 'POST',
+            url: '/users/register/',
+            data: $.param({email: $scope.user.email, username: $scope.user.username, password: $scope.user.password,  password2: $scope.user.password2}),
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+         }).then(function successCallback(response) {
+            $scope.errorMessage = "Registration success";
+        }, function errorCallback(response) {
+        	  console.log("Something happen");
+        });
+    }; 
+    
     $scope.login = function (user) {
 
         $http({

@@ -1,25 +1,21 @@
-<h2 class="page-header">Register</h2>
-<!--{{#if errors}}-->
-<!--{{#each errors}}-->
-<!--<div class="alert alert-danger">{{msg}}</div>-->
-<!--{{/each}}-->
-<!--{{/if}}-->
+<h2 class="page-header">Account creation</h2>
+{{errorRegisterMessage}}
 <form method="post" action="/users/register">
-    <div class="form-group">
-        <label>Username</label>
-        <input type="text" class="form-control" placeholder="Username" name="username">
-    </div>
-    <div class="form-group">
-        <label>Email</label>
-        <input type="email" class="form-control" placeholder="Email" name="email">
-    </div>
-    <div class="form-group">
-        <label>Password</label>
-        <input type="password" class="form-control" placeholder="Password" name="password">
-    </div>
-    <div class="form-group">
-        <label>Confirm Password</label>
-        <input type="password" class="form-control" placeholder="Password" name="password2">
-    </div>
-    <button type="submit" class="btn btn-default">Submit</button>
+	<div class="form-group">
+		<label>Username</label> <input type="text" class="form-control"
+			placeholder="Username" name="username"  ng-model="user.username">
+	</div>
+	<div class="form-group">
+		<label>Email</label> <input type="email" class="form-control"
+			placeholder="Email" name="email"  ng-model="user.email">
+	</div>
+	<div class="form-group">
+		<label>Password</label> <input type="password" class="form-control"
+			placeholder="Password" name="password"  ng-model="user.password">
+	</div>
+	<div class="form-group">
+		<label>Confirm Password</label> <input type="password"
+			class="form-control" placeholder="Password" name="password2"  ng-model="user.password2">
+	</div>
+	<button type="submit" class="btn btn-default" ng-click="register()">Submit</button>
 </form>
