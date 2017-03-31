@@ -48,11 +48,7 @@ router.post('/register', function(req, res) {
 				} else {
 					console.log("user " + user.username + " was created");
 					req.login(user, function(err) {
-						if (!err) {
-							res.redirect('/likes');
-						} else {
-							console.log(err);
-						}
+						return res.send(req.user);
 					});
 				}
 			});
@@ -124,7 +120,6 @@ router.get('/logout', function(req, res) {
 
 router.post('/forgot', function(req, res, next) {
 	var email = req.body.email;
-	console.log("inside the forgot route user: email: " + email);
 	async.waterfall([
 		function(done) {
 			crypto.randomBytes(20, function(err, buf) {

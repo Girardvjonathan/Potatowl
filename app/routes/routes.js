@@ -5,24 +5,33 @@ module.exports = function(app) {
 
 	// frontend routes =========================================================
 	// route to handle all angular requests
+
+	// Get Homepage
+
 	app.get('/', function(req, res) {
 		res.sendfile('./public/index.html');
 	});
-	
-    // Init db with user
-    app.get('/initdb', function(req, res) {
-        require('./../models/migration')();
-        return res.send(JSON.stringify("ok"));
-    });
 
-    var users = require('./users');
-    app.use('/users', users);
+	app.get("/isAuth", function(req, res, next) {
+		if (req.isAuthenticated()) {
+			res.status(200);
+			return res.send(req.user);
+		}
+	});
 
-    var likes = require('./likes');
-    app.use('/likes', likes);
+	// Init db with user
+	app.get('/initdb', function(req, res) {
+		require('./../models/migration')();
+		return res.send(JSON.stringify("ok"));
+	});
 
-    app.get('*', function(req, res) {
-        res.sendfile('./public/index.html');
-    });
+	var users = require('./users');
+	app.use('/users', users);
 
+	var likes = require('./likes');
+	app.use('/likes', likes);
+
+	app.get('*', function(req, res) {
+		res.sendfile('./public/index.html');
+	});
 };
