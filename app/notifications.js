@@ -11,9 +11,9 @@ module.exports = {
         var https = require("https");
         var nodemailer = require('nodemailer');
         var smtpTransport = require('nodemailer-smtp-transport');
-        
+
         var dayOfWeek = new Date().getDay();
-        
+
         User.find({}, function(err, users) {
             if (!err){ 
                 users.forEach(function(user) {
@@ -33,7 +33,7 @@ module.exports = {
                 console.log('Unable to get users from the database. Error : ' + err);
             }
         });
-        
+
         function sendNotification(email, followedSeries, frequency) {
             var promises = [];
 
@@ -43,12 +43,12 @@ module.exports = {
                     return getLastSeasonInfo(seriesInfo);
                 }));
             });
-            
+
             var message = '';
             Promise.all(promises).then(function AcceptHandler(series) {
                 series.forEach(function(serie) {
                     serie.lastSeason.episodes.forEach(function(episode) {
-                        
+
                         // Build the message
                         var airDate = new Date(episode.air_date.replace(/-/g, '/'));
                         if (frequency == 'WEEKLY' && isWithinTheWeek(airDate)) {
@@ -68,9 +68,9 @@ module.exports = {
                     }
                     message = 'No TV show you are following will air new episodes ' + frequencyText + '.\n';
                 }
-                
+
                 message = 'Good morning! Here is your STAPP automatic report :\n\n' + message;
-                
+
                 var transport = nodemailer.createTransport(smtpTransport({
                     service : "gmail",
                     auth : {
@@ -111,7 +111,7 @@ module.exports = {
                     deferred.resolve(data);
                 });
             });
-            
+
             req.end();
             return deferred.promise;
         }
@@ -130,7 +130,7 @@ module.exports = {
                     deferred.resolve(seriesInfo);
                 });
             });
-            
+
             req.end();
             return deferred.promise;
         }

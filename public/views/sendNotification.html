@@ -7,8 +7,9 @@
     <h3>Message</h3>
 
     <div class="form-group">
-        <textarea rows="6" cols="50" name="message">{{message}}</textarea>
+        <textarea rows="6" cols="50" name="message" placeholder="Type your message here" ng-model="message"></textarea>
     </div>
     <input type="hidden" name="serie_id" value="{{id}}">
-    <button class="btn btn-default" ng-click="sendNotification()">Submit</button>
+    <p ng-if="resultMessage" ng-class="messageClass">{{resultMessage}}</p>
+    <button class="btn btn-default" ng-click="sendNotification()">Send notification</button>
 </form>

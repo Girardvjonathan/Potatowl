@@ -15,11 +15,15 @@ var Like = module.exports = mongoose.model('Like', LikeSchema);
 
 module.exports.addLike = function(newLike, callback){
     newLike.save(callback);
-
 }
 
 module.exports.getLikeBySerieId = function(serie_id, callback){
     var query = {serie_id: serie_id};
+    Like.findOne(query, callback);
+}
+
+module.exports.getLikeBySerieIdAndUserId = function(serie_id, user_id, callback){
+    var query = {serie_id: serie_id, user_id: user_id};
     Like.findOne(query, callback);
 }
 

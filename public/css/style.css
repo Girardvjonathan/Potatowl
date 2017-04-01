@@ -292,6 +292,14 @@ h2.page-header {
     font-size: 18px;
 }
 
+.error {
+    color: #a94442;
+}
+
+.success {
+    color: #3c763d;
+}
+
 @media screen and (min-width: 400px) {
     #login-form input,
     #register-form input {
