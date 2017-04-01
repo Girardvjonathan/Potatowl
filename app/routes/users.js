@@ -27,29 +27,33 @@ router.post('/register', function(req, res) {
 
 	var errors = req.validationErrors();
 
-	if (errors) {
-        res.send(JSON.stringify(errors));
-	} else {
-		var newUser = new User({
-			email : email,
-			username : username,
-			password : password
-		});
+	User.findOne({
+		email : req.body.email
+	}, function(err, user) {
+		if (user) {
+			return res.redirect('/register/[{"msg":"This email is already used"}]');
+		}
+		if (errors) {
+			return res.redirect('/register/' + JSON.stringify(errors));
+		} else {
+			var newUser = new User({
+				email : email,
+				username : username,
+				password : password
+			});
 
-        User.createUser(newUser, function(err, user) {
-			if (err) {
-				console.log(err);
-			} else {
-				req.login(user, function(err) {
-					if (!err) {
-						res.redirect('/likes');
-					} else {
-						console.log(err);
-					}
-				});
-			}
-		});
-	}
+			User.createUser(newUser, function(err, user) {
+				if (err) {
+					console.log(err);
+				} else {
+					console.log("user " + user.username + " was created");
+					req.login(user, function(err) {
+						return res.send(req.user);
+					});
+				}
+			});
+		}
+	});
 });
 
 passport.use(new LocalStrategy(
@@ -116,7 +120,6 @@ router.get('/logout', function(req, res) {
 
 router.post('/forgot', function(req, res, next) {
 	var email = req.body.email;
-	console.log("inside the forgot route user: email: " + email);
 	async.waterfall([
 		function(done) {
 			crypto.randomBytes(20, function(err, buf) {
@@ -214,7 +217,6 @@ router.get('/reset/:token&:email', function(req, res) {
 		}
 	}, function(err, user) {
 		if (!user) {
-			req.flash('error', 'Password reset token is invalid or has expired.');
 			return res.redirect('/forgot');
 		}
 

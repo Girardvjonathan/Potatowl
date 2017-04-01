@@ -131,19 +131,15 @@
                 $scope.tagline = data.tagline;
             });
         };
-        $scope.addlike = function (id) {
-            // console.log("adding this to your likes" + id, $rootScope.user,$rootScope.user.id);
+        $scope.addLike = function (id) {
             $rootScope.likes.push(id.toString());
 
-            // document.getElementById('add-'+id).outerHTML = "<i class=\"icon-star\"></i>You like this serie";
             $http({
                 method: 'POST',
                 url: '/likes/add/',
                 data: $.param({user_id: $rootScope.user._id, serie_id: id}),
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             }).then(function successCallback(response) {
-                // console.log("ho hi",response.data);
-                // $location.path('/likes');
             }, function errorCallback(response) {
                 $scope.errorMessage = response.data;
             });
@@ -151,7 +147,6 @@
 
         $scope.alreadyLiked = function(id) {
             if(!$rootScope.likes) return false;
-            // console.log("looking for this "+id + "in " + $rootScope.likes + " --" + bool);
             return $rootScope.likes.indexOf(id.toString()) > -1;
         };
 

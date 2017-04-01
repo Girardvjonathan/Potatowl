@@ -1,6 +1,6 @@
 <h2 class="page-header">Account Login</h2>
 {{errorMessage}}
-<form>
+<form id="login-form">
     <div class="form-group">
         <label>Username</label>
         <input type="text" class="form-control" ng-model="user.username" placeholder="Username">
@@ -10,6 +10,5 @@
         <input type="password" class="form-control" required ng-model="user.password" placeholder="Password">
     </div>
     <button class="btn btn-default" ng-click="login(user)">Submit</button>
-    </br>
-    <a href="/forgot">Forgot Password?</a>
+    <a class="link-forgot" href="/forgot">Forgot Password?</a>
 </form>
