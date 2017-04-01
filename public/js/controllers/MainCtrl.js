@@ -33,9 +33,7 @@ angular.module('MainCtrl', []).controller('MainController', function($timeout, $
 
 	if ($rootScope.user != null) {
 		$scope.username = $rootScope.user.username;
-	} else if ($location.path() == "/profile") {
-		$location.path("/login");
-	}
+	} 
 
 	if ($rootScope.likes) {
 		if ($rootScope.likes != null) {
@@ -140,6 +138,7 @@ angular.module('MainCtrl', []).controller('MainController', function($timeout, $
 		
 		}, function errorCallback() {
 			$scope.errorMessage = "Something wrong happen";
+			$location.path('/');
 		});
 
 	};

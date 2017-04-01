@@ -15,14 +15,6 @@
                 $scope.user = newValue;
             }
         });
-        //  var $search = $('#search');
-        //   $search.keypress(function (e) {
-        //       console.log('ok');
-        //       if (e.keyCode == 13) {
-        //           loadData();
-        //           $scope.page = 1;
-        //       }
-        //   });
 
         var init = function () {
             $scope.page = 1;
@@ -40,14 +32,6 @@
                 $("#spinner").hide();
             });
         };
-
-        // $scope.searchFilter = function (input) {
-        //     if (input) {
-        //         return input.name.indexOf($scope.search) >= 0;
-        //     }
-        //     return true;
-        //
-        // };
 
         function loadData() {
             var deferred = $q.defer();
@@ -131,6 +115,8 @@
                 $scope.tagline = data.tagline;
             });
         };
+       
+        
         $scope.addLike = function (id) {
             $rootScope.likes.push(id.toString());
 

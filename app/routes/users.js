@@ -91,6 +91,31 @@ passport.deserializeUser(function(id, done) {
 	});
 });
 
+router.post('/saveOptions', function(req, res) {
+	var email = req.body.email;
+	var frequency = req.body.frequency;
+	var specialNotification = req.body.specialNotification;
+	User.findOne({
+		email : email
+	}, function(err, user, done) {
+		if (!user) {
+			console.log("no user found with: " + email);
+			return res.redirect('/login');
+		}
+
+		if (frequency == 'Daily') {
+			user.notificationsFrequency = "DAILY";
+		} else if (frequency == 'Weekly') {
+			user.notificationsFrequency = "WEEKLY";
+		} else {
+			user.notificationsFrequency = "NONE";
+		}
+		user.specialNotifications = specialNotification;
+
+		user.save();
+		return res.redirect('/likes');
+	});
+});
 router.post('/login', function(req, res, next) {
 	passport.authenticate('local', function(err, user, info) {
 		if (err) {
