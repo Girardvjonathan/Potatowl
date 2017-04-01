@@ -21,8 +21,8 @@ var UserSchema = mongoose.Schema({
     },
     notificationsFrequency: {
         type: String,
-        enum: ['DAILY', 'WEEKLY'],
-        default: 'WEEKLY'
+        enum: ['DAILY', 'WEEKLY', 'NONE'],
+        default: 'NONE'
     },
     specialNotifications: {
         type: Boolean,
