@@ -7,6 +7,8 @@
 		}
 		$scope.title = "Liked TV Shows";
 		$scope.likedSeries = [];
+		$scope.frequencies = [ "None", "Daily", "Weekly" ];
+
 		const CONFIG_DESC = 'https://api.themoviedb.org/3/tv/';
 		const KEY = '?api_key=1b1497adc03fb28cf8df7fa0cdaed980';
 
@@ -38,6 +40,25 @@
 			return deferred.promise;
 		}
 
+		$scope.saveOptions = function() {
+			$http({
+				method : 'POST',
+				url : '/users/saveOptions/',
+				data : $.param({
+					email : $scope.user.email,
+					frenquency : $scope.frequency,
+					specialNotification : $scope.specialNotification
+				}),
+				headers : {
+					'Content-Type' : 'application/x-www-form-urlencoded'
+				}
+			}).then(function successCallback(response) {
+				console.log("Options saved");
+			}, function errorCallback() {
+				console.log("Options not saved");
+			});
+		}
+		
 		$scope.getPosterMedium = function(url) {
 			if (url === null) {
 				return 'images/cover-placeholder.jpg';
@@ -70,8 +91,6 @@
 					'Content-Type' : 'application/x-www-form-urlencoded'
 				}
 			}).then(function successCallback(response) {
-				//Remove the div from the user view
-				// document.getElementById(id).innerHTML = "";
 				$route.reload();
 			}, function errorCallback(response) {
 				$scope.errorMessage = response.data;

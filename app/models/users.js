@@ -25,7 +25,8 @@ var UserSchema = mongoose.Schema({
         default: 'WEEKLY'
     },
     specialNotifications: {
-        type: Boolean
+        type: Boolean,
+    	default: false
     },
     resetPasswordToken : {
         type : String
