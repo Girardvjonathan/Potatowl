@@ -15,6 +15,7 @@ var async = require('async');
 var crypto = require('crypto');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var nodeSchedule = require('node-schedule');
 
 var nodemailer = require("nodemailer");
 var smtpTransport = require('nodemailer-smtp-transport');
@@ -108,6 +109,20 @@ app.use(function(req, res, next) {
 
 // routes ==================================================
 require('./app/routes/routes')(app); // configure our routes
+
+// Automatic notifications
+var notificationsSender = require('./app/notifications');
+
+// Every day at 6 AM
+var rule = new nodeSchedule.RecurrenceRule();
+// Comment the following two lines and uncomment the third for testing (every 10 seconds)
+rule.hour = 6;
+rule.minute = 0;
+//rule.second = [0, 10, 20, 30, 40, 50];
+
+nodeSchedule.scheduleJob(rule, function(){
+    notificationsSender.sendNotifications();
+});
 
 // expose app
 exports = module.exports = app;
