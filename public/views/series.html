@@ -14,7 +14,7 @@
                 Add to your likes
             </button>
             <!-- Not optimale doing twice the work-->
-            <h4 ng-if="user.role!='admin' && alreadyLiked(elem[rowIndex+elIdx].id)"><i class="icon-star"></i>You like this serie</h4>
+            <h4 ng-if="user && user.role!='admin' && alreadyLiked(elem[rowIndex+elIdx].id)"><i class="icon-star"></i>You like this serie</h4>
             <a ng-href="/notification/{{elem[rowIndex+elIdx].id}}/{{elem[rowIndex+elIdx].name}}" ng-if="user.role=='admin'">
                 <i class="fa fa-inbox" aria-hidden="true"></i>
                 Send notification

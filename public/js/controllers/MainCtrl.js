@@ -111,6 +111,14 @@ angular.module('MainCtrl', []).controller('MainController', function($timeout, $
 	}
 	
 	$scope.logout = function() {
+		$rootScope.likes == null;
+		
+		if($rootScope.user == null) {
+			$scope.user == null;
+			$location.path('/');
+			return;
+		}
+		
 		$http({
 			method : 'GET',
 			url : '/users/logout/',
@@ -119,6 +127,7 @@ angular.module('MainCtrl', []).controller('MainController', function($timeout, $
 			}
 		}).then(function successCallback(response) {
 			$rootScope.user = null;
+			$scope.user == null;
 			$scope.timeInMs = 0;
 
 		    var countUp = function() {
