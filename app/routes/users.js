@@ -90,33 +90,32 @@ passport.deserializeUser(function(id, done) {
 		done(err, user);
 	});
 });
-	
-	router.post('/saveOptions', function(req, res){
-		var email = req.body.email;
-		var frequency = req.body.frequency;
-		var specialNotification = req.body.specialNotification;
-		
-		User.findOne({
-			email : email
-		}, function(err, user) {
-			if (!user) {
-				console.log("no user found with: " + email);
-				return res.redirect('/login');
-			}
-			if(frequency == 'Daily'){
-				user.notificationsFrequency = user.notificationsFrequency.DAILY;
-			} else if(frequency == 'Monthly'){
-				user.notificationsFrequency = user.notificationsFrequency.MONTHLY;
-			} else {
-				
-			}
-			
 
-			user.save(function(err) {
-				done(err, token, user);
-			});
-		});
+router.post('/saveOptions', function(req, res) {
+	var email = req.body.email;
+	var frequency = req.body.frequency;
+	var specialNotification = req.body.specialNotification;
+	User.findOne({
+		email : email
+	}, function(err, user, done) {
+		if (!user) {
+			console.log("no user found with: " + email);
+			return res.redirect('/login');
+		}
+
+		if (frequency == 'Daily') {
+			user.notificationsFrequency = "DAILY";
+		} else if (frequency == 'Weekly') {
+			user.notificationsFrequency = "WEEKLY";
+		} else {
+			user.notificationsFrequency = "NONE";
+		}
+		user.specialNotifications = specialNotification;
+
+		user.save();
+		return res.redirect('/likes');
 	});
+});
 router.post('/login', function(req, res, next) {
 	passport.authenticate('local', function(err, user, info) {
 		if (err) {

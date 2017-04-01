@@ -1,6 +1,6 @@
 <div class="jumbotron text-center">
 	<h1>{{title}}</h1>
-	<div class="row" ng-repeat="(rowIndex, value) in series  as elem"
+	<div class="row" ng-repeat="(rowIndex, value) in likedSeries as elem"
 		ng-if="rowIndex % 4 == 0">
 		<div class="col-md-3 " ng-repeat="elIdx in [0,1,2,3]"
 			ng-if="elem[rowIndex+elIdx]" id="{{elem[rowIndex+elIdx].id}}">
@@ -26,23 +26,22 @@
 <hr>
 
 <form id="options-form">
-	<div>
+	<div ng-if="hasLikedSeries()">
 		<legend>Notification options</legend>
 		<label>Notification frequency</label> <select class="form-control"
-			id="frequencies" ng-model="user.frequency">
+			id="frequencies" ng-model="frequency">
 			<option value="" disabled selected>----Select----</option>
 			<option ng-repeat='f in frequencies'>{{f}}</option>
 		</select> <br>
 		
 		<div class="form-group form-group-check">
-			<label>Value2: <input type="checkbox"
-				ng-model="specialNotifiction" ng-true-value="'YES'"
-				ng-false-value="'NO'">
+			<label>Special notifications: <input type="checkbox"
+				ng-model="specialNotification" ng-true-value='true'
+				ng-false-value='false'>
 			</label>
 		</div>
-		
-	</div>
-	</br>
 	<button type="submit" class="btn btn-primary"
-		ng-click="saveOptions()">Search</button>
+		ng-click="saveOptions()">Save</button>	
+		{{confirmationMessage}}			
+	</div>
 </form>

@@ -5,31 +5,24 @@
 		if (!$rootScope.user) {
 			$location.path("/login");
 		}
+		
 		$scope.title = "Liked TV Shows";
-		$scope.likedSeries = [];
 		$scope.frequencies = [ "None", "Daily", "Weekly" ];
 
 		const CONFIG_DESC = 'https://api.themoviedb.org/3/tv/';
 		const KEY = '?api_key=1b1497adc03fb28cf8df7fa0cdaed980';
 
 		var init = function() {
-			var series = [];
-			$scope.series = series;
-
-			if ($rootScope.likes != null) {
-				$rootScope.likes.forEach(function(value) {
-
-					var promise = loadData(value);
-					promise.then(function(data) {
-						series.push(data.data);
-					}, function(reason) {
-						alert('Failed: ' + reason);
-						$("#spinner").hide();
-					});
-				});
+			if($scope.likedSeries == null){
+				getLikes();
 			}
+
 		};
 
+		$scope.hasLikedSeries = function() {
+			return $scope.likedSeries && $scope.likedSeries.length > 0;
+		}
+		
 		function loadData(id) {
 			var deferred = $q.defer();
 			deferred.notify('Chargement de l\'information ');
@@ -40,25 +33,57 @@
 			return deferred.promise;
 		}
 
+		function getLikes() {
+			if($rootScope.user == null){
+				return;
+			}
+			$http({
+				method : 'GET',
+				url : '/likes/getAll',
+				headers : {
+					'user_id' : $rootScope.user._id
+				}
+			}).then(function successCallback(response) {
+				var series = valuesToArray(response.data);
+				console.log("series: " + series);
+				if (series != null) {
+					$scope.likedSeries = [];
+					series.forEach(function(value) {
+						var promise = loadData(value);
+						promise.then(function(data) {
+							$scope.likedSeries.push(data.data);
+						}, function(reason) {
+							alert('Failed: ' + reason);
+							$("#spinner").hide();
+						});
+					});
+				}
+			}, function errorCallback(err) {
+				console.log(err);
+			});
+		}
+		
 		$scope.saveOptions = function() {
 			$http({
 				method : 'POST',
 				url : '/users/saveOptions/',
 				data : $.param({
 					email : $scope.user.email,
-					frenquency : $scope.frequency,
+					frequency : $scope.frequency,
 					specialNotification : $scope.specialNotification
 				}),
 				headers : {
 					'Content-Type' : 'application/x-www-form-urlencoded'
 				}
 			}).then(function successCallback(response) {
-				console.log("Options saved");
+				$scope.confirmationMessage = "Options saved";
 			}, function errorCallback() {
 				console.log("Options not saved");
 			});
 		}
 		
+
+			
 		$scope.getPosterMedium = function(url) {
 			if (url === null) {
 				return 'images/cover-placeholder.jpg';
@@ -73,6 +98,11 @@
 			return 'https://image.tmdb.org/t/p/w500/' + url;
 		};
 
+		function valuesToArray(obj) {
+			return Object.keys(obj).map(function(key) {
+				return obj[key]['serie_id'];
+			});
+		}
 
 		$scope.removeLiked = function(id) {
 			var index = $rootScope.likes.indexOf(id.toString());
