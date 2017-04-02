@@ -29,17 +29,16 @@
 	<div ng-if="hasLikedSeries()">
 		<legend>Notification options</legend>
 		<label>Notification frequency</label> <select class="form-control"
-			id="frequencies" ng-model="frequency">
+			id="frequencies" ng-model="options.frequency">
 			<option value="" disabled selected>----Select----</option>
 			<option ng-repeat='f in frequencies'>{{f}}</option>
 		</select> <br>
 		
-		<div class="form-group form-group-check">
-			<label>Special notifications: <input type="checkbox"
-				ng-model="specialNotification" ng-true-value='true'
-				ng-false-value='false'>
-			</label>
-		</div>
+	<div class="form-group form-group-check">
+		<input class="form-control" ng-model="options.specialNotification" type="checkbox" id="specialNotification">
+		<label for="specialNotification">Receive special notifications </label>
+	</div>
+	
 	<button type="submit" class="btn btn-primary"
 		ng-click="saveOptions()">Save</button>	
 		{{confirmationMessage}}			

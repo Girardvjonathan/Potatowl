@@ -10,6 +10,7 @@
 		
 		$scope.title = "Liked TV Shows";
 		$scope.frequencies = [ "None", "Daily", "Weekly" ];
+		$scope.options = {};
 
 		const CONFIG_DESC = 'https://api.themoviedb.org/3/tv/';
 		const KEY = '?api_key=1b1497adc03fb28cf8df7fa0cdaed980';
@@ -70,8 +71,8 @@
 				url : '/users/saveOptions/',
 				data : $.param({
 					email : $scope.user.email,
-					frequency : $scope.frequency,
-					specialNotification : $scope.specialNotification
+					frequency : $scope.options.frequency,
+					specialNotification : $scope.options.specialNotification
 				}),
 				headers : {
 					'Content-Type' : 'application/x-www-form-urlencoded'
