@@ -2,8 +2,10 @@
 	'use strict';
 	angular.module('SeriesLiked', []).controller('SeriesLikedCtrl', [ '$http', '$rootScope', '$q', '$scope', '$location', '$httpParamSerializer', '$route', TV ]);
 	function TV($http, $rootScope, $q, $scope, $location, $httpParamSerializer, $route) {
-		if (!$rootScope.user) {
+		if ($rootScope.user == null) {
 			$location.path("/login");
+		} else {
+			$scope.user = $rootScope.user;
 		}
 		
 		$scope.title = "Liked TV Shows";
@@ -11,6 +13,7 @@
 
 		const CONFIG_DESC = 'https://api.themoviedb.org/3/tv/';
 		const KEY = '?api_key=1b1497adc03fb28cf8df7fa0cdaed980';
+	
 
 		var init = function() {
 			if($scope.likedSeries == null){
@@ -45,7 +48,7 @@
 				}
 			}).then(function successCallback(response) {
 				var series = valuesToArray(response.data);
-				console.log("series: " + series);
+
 				if (series != null) {
 					$scope.likedSeries = [];
 					series.forEach(function(value) {

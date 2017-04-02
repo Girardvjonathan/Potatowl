@@ -1,8 +1,8 @@
-angular.module('MainCtrl', []).controller('MainController', function($timeout, $http, $routeParams, $scope, $location, $rootScope) {
+angular.module('MainCtrl', []).controller('MainController', function($route, $http, $routeParams, $scope, $location, $rootScope) {
 
 	$scope.tagline = 'Series tracker application';
-
-	function isAuth() {
+    $scope.appName = "Potatowl";
+	function isUserAuthenticated() {
 		$http({
 			method : 'GET',
 			url : '/isAuth/',
@@ -12,13 +12,15 @@ angular.module('MainCtrl', []).controller('MainController', function($timeout, $
 			$rootScope.user = $scope.user;
 			$scope.username = $scope.user.username;
 			getLikes();
-		}, function errorCallback() {});
+		}, function errorCallback() {
+			console.log("error with the API isAuth");
+		});
 	}
 	
 	if ($rootScope.user != null) {
 		$scope.user = $rootScope.user;
 	} else {
-		isAuth();
+		isUserAuthenticated();
 	}
 	
 	
@@ -79,6 +81,7 @@ angular.module('MainCtrl', []).controller('MainController', function($timeout, $
 			$rootScope.user = response.data;
 			if ($rootScope.user != null) {
 				$scope.username = $rootScope.user.username;
+				$scope.user = $rootScope.user;
 			}
 			getLikes();
 		}, function errorCallback() {
@@ -95,6 +98,7 @@ angular.module('MainCtrl', []).controller('MainController', function($timeout, $
 				'user_id' : $rootScope.user._id
 			}
 		}).then(function successCallback(response) {
+
 			$rootScope.likes = valuesToArray(response.data);
 			$rootScope.numberSeries = $rootScope.likes.length;
 			if ($rootScope.user.role == "admin") {
@@ -109,14 +113,6 @@ angular.module('MainCtrl', []).controller('MainController', function($timeout, $
 	}
 	
 	$scope.logout = function() {
-		$rootScope.likes == null;
-		
-		if($rootScope.user == null) {
-			$scope.user == null;
-			$location.path('/');
-			return;
-		}
-		
 		$http({
 			method : 'GET',
 			url : '/users/logout/',
@@ -125,15 +121,8 @@ angular.module('MainCtrl', []).controller('MainController', function($timeout, $
 			}
 		}).then(function successCallback(response) {
 			$rootScope.user = null;
-			$scope.user == null;
-			$scope.timeInMs = 0;
-
-		    var countUp = function() {
-		        $scope.timeInMs+= 500;
-		        $timeout(countUp, 500);
-		    }
-
-		    $timeout(countUp, 500);
+			$scope.user = null;
+			$rootScope.likes = null;
 			$location.path('/');
 		
 		}, function errorCallback() {

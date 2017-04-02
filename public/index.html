@@ -36,7 +36,7 @@
     <!-- HEADER -->
     <nav class="navbar navbar-inverse">
         <div class="navbar-header">
-            <a class="navbar-brand" ng-controller="SeriesController" href="/">{{appName}}</a>
+            <a class="navbar-brand" href="/">{{appName}}</a>
         </div>
         <ul class="nav navbar-nav">
             <li><a href="/series">TV shows</a></li>
@@ -49,7 +49,7 @@
             <li ng-if="!user"><a href="/login">Login</a></li>
             <li ng-if="!user"><a href="/register">Register</a></li>
             <li ng-if="user"><a href="#" ng-click="logout()">Log out</a></li>
-            <li ng-if="user"><a href="#" ng-controller="MainController">Hi {{username}}</a></li>
+            <li ng-if="user"><a href="#">Hi {{username}}</a></li>
         </ul>
     </nav>
     <p ng-if="user && user.role == 'admin'"><i class="fa fa-user-circle" aria-hidden="true">Admin</i></p>

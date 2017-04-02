@@ -4,7 +4,7 @@
     function TV($http, $q, $scope, $rootScope, $location, $httpParamSerializer) {
         $scope.title = "Popular TV Shows";
         if($location.search().query) $scope.title = "Results for \""+$location.search().query+"\"";
-        $scope.appName = "Potatowl";
+
         const KEY = '?api_key=1b1497adc03fb28cf8df7fa0cdaed980';
         const CONFIG_URL = 'https://api.themoviedb.org/3/discover/tv' + KEY + '&page=';
         const CONFIG_DESC = 'https://api.themoviedb.org/3/tv/';
