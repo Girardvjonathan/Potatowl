@@ -51,7 +51,7 @@ router.post('/remove', ensureAuthenticated, function(req, res) {
 });
 
 router.get('/getAll', ensureAuthenticated, function(req, res) {
-    var user_id = req.headers.user_id;
+    var user_id = req.query.user_id;
     Like.getUserLikes(user_id,function (err, likes) {
         if(err) throw err;
         return res.send(JSON.stringify(likes));

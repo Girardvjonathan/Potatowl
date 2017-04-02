@@ -6,7 +6,9 @@ angular.module('MainCtrl', []).controller('MainController', function($route, $ht
 		$http({
 			method : 'GET',
 			url : '/isAuth/',
-			headers : {}
+			headers : {
+				'Content-Type' : 'application/x-www-form-urlencoded'
+			}
 		}).then(function successCallback(response) {
 			$scope.user = response.data;
 			$rootScope.user = $scope.user;
@@ -89,16 +91,12 @@ angular.module('MainCtrl', []).controller('MainController', function($route, $ht
 		});
 	};
 
-
 	function getLikes() {
 		$http({
 			method : 'GET',
 			url : '/likes/getAll',
-			headers : {
-				'user_id' : $rootScope.user._id
-			}
+			params : {user_id : $rootScope.user._id}
 		}).then(function successCallback(response) {
-
 			$rootScope.likes = valuesToArray(response.data);
 			$rootScope.numberSeries = $rootScope.likes.length;
 			if ($rootScope.user.role == "admin") {
@@ -115,10 +113,7 @@ angular.module('MainCtrl', []).controller('MainController', function($route, $ht
 	$scope.logout = function() {
 		$http({
 			method : 'GET',
-			url : '/users/logout/',
-			headers : {
-				'user_id' : $rootScope.user._id
-			}
+			url : '/users/logout/'
 		}).then(function successCallback(response) {
 			$rootScope.user = null;
 			$scope.user = null;

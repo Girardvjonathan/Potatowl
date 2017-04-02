@@ -43,9 +43,7 @@
 			$http({
 				method : 'GET',
 				url : '/likes/getAll',
-				headers : {
-					'user_id' : $rootScope.user._id
-				}
+				params : {user_id : $rootScope.user._id}
 			}).then(function successCallback(response) {
 				var series = valuesToArray(response.data);
 
