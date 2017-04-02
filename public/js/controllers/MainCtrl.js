@@ -1,7 +1,7 @@
 angular.module('MainCtrl', []).controller('MainController', function($route, $http, $routeParams, $scope, $location, $rootScope) {
 
 	$scope.tagline = 'Series tracker application';
-    $scope.appName = "Potatowl";
+    $scope.appName = "STAPP";
 	function isUserAuthenticated() {
 		$http({
 			method : 'GET',
